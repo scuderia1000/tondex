@@ -1,3 +1,9 @@
+:root {
+  --input-bg-color: rgb(247, 248, 250);
+  --active-bg-color: rgb(233, 234, 235);
+  --hover-bg-color: rgb(206, 208, 217);
+}
+
 @font-face {
   font-family: 'Mulish-Regular';
   src: local('Mulish-Regular'), url(./styles/fonts/Mulish-Regular.ttf) format('truetype');
@@ -56,5 +62,5 @@ body,
   font-family: Mulish-Regular, sans-serif;
   -webkit-text-size-adjust: 100%;
   color: #303757;
-  word-break: break-word;
+  /*word-break: break-word;*/
 }

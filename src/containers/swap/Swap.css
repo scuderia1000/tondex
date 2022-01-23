@@ -1,0 +1,8 @@
+.swap {
+  padding: 8px;
+}
+
+.swap-container {
+  display: grid;
+  row-gap: 8px;
+}

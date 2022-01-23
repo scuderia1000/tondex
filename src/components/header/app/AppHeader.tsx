@@ -1,9 +1,9 @@
 import React from 'react';
-import logo from '../assets/svg/logo.svg';
-import { TON } from '../../const';
-import './styles.css';
+import logo from '../../assets/svg/logo.svg';
+import { TON } from '../../../const';
+import './AppHeader.css';
 
-const Header: React.FC = () => (
+const AppHeader: React.FC = () => (
   <div className="app-header">
     <header>
       <div className="container">
@@ -16,4 +16,4 @@ const Header: React.FC = () => (
   </div>
 );
 
-export default Header;
+export default AppHeader;

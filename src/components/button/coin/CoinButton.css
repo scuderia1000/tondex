@@ -1,0 +1,43 @@
+.coin-button {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: space-between;
+  /*display: grid;*/
+  /*grid-template-columns: 1fr 1fr;*/
+  /*column-gap: 1rem;*/
+  height: 2.4rem;
+  width: initial;
+  padding: 0 8px;
+  /*color: rgb(0, 0, 0);*/
+  cursor: pointer;
+  border-radius: 16px;
+  outline: none;
+  user-select: none;
+  border: none;
+  font-size: 24px;
+  font-weight: 600;
+  background-color: rgb(237, 238, 242);
+  box-shadow: rgba(0, 0, 0, 0.08) 0 6px 10px;
+}
+
+.coin-button:hover {
+  background-color: var(--hover-bg-color);
+}
+
+.coin-button-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.coin-button--label {
+  margin: 0 4px;
+  font-size: 1.1rem;
+}
+
+.coin-button--image {
+  width: 24px;
+  height: 24px;
+  margin-right: 8px;
+}

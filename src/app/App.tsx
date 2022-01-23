@@ -1,11 +1,13 @@
 import React from 'react';
 import './App.css';
-import Header from '../components/header';
+import AppHeader from '../components/header/app/AppHeader';
+import Workspace from '../containers/workspace/Workspace';
 
 function App() {
   return (
     <>
-      <Header />
+      <AppHeader />
+      <Workspace />
     </>
   );
 }
