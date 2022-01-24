@@ -1,24 +1,20 @@
 import React from 'react';
-import tokens from '../../../mock/tokens.json';
 import './CoinButton.css';
+import { ITokenInfo } from '../../../types';
 
 interface IProps {
-  label?: string;
-  imgSrc?: string;
+  token?: ITokenInfo;
 }
 
 const cssPrefix = 'coin-button';
 
-const wethToken = tokens.find((token) => token.symbol === 'WETH');
-
-const CoinButton: React.FC<IProps> = ({ label }) => {
-  console.log('CoinButton', label);
-  console.log('wethToken', wethToken);
+const CoinButton: React.FC<IProps> = ({ token }) => {
+  console.log('CoinButton');
 
   return (
     <button className={cssPrefix}>
-      <img className={`${cssPrefix}--image`} src={wethToken?.logoURI} />
-      <span className={`${cssPrefix}--label`}>{wethToken?.symbol}</span>
+      <img className={`${cssPrefix}--image`} src={token?.logoURI} alt={`${token?.symbol}-logo`} />
+      <span className={`${cssPrefix}--label`}>{token?.symbol}</span>
     </button>
   );
 };
