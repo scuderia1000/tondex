@@ -1,5 +1,5 @@
 import React from 'react';
-import logo from '../../assets/svg/logo.svg';
+import { ReactComponent as Logo } from '../../assets/svg/logo.svg';
 import { TON } from '../../../const';
 import './AppHeader.css';
 
@@ -8,7 +8,7 @@ const AppHeader: React.FC = () => (
     <header>
       <div className="container">
         <a href={'/'} className="logo">
-          <img src={logo} alt="logo" />
+          <Logo />
           <span>{TON}</span>
         </a>
       </div>

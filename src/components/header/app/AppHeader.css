@@ -40,7 +40,7 @@ header .container {
   text-decoration: none;
 }
 
-.logo img {
+.logo svg {
   display: inline-block;
   vertical-align: middle;
   width: 36px;

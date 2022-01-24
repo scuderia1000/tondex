@@ -23,6 +23,7 @@
   background-color: var(--disabled-bg-color);
   color: var(--color-disabled);
   opacity: 0.5;
+  cursor: auto;
 }
 
 .button--label {
