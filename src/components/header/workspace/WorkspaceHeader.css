@@ -24,9 +24,13 @@
   font-weight: 600;
   line-height: 1;
   text-decoration: none;
+  color: var(--main-bg-color);
+}
+.workspace-header__link:hover {
+  color: var(--color-black);
 }
 
 .workspace-header__link.active {
-  /*font-weight: 600;*/
-  background-color: var(--active-bg-color);
+  color: var(--color-white);
+  background-color: var(--main-bg-color);
 }

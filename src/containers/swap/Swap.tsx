@@ -1,6 +1,8 @@
 import React from 'react';
 import './Swap.css';
 import Input from '../../components/input/Input';
+import Button from '../../components/button/Button';
+import { SWAP } from '../../const';
 
 const cssPrefix = 'swap';
 
@@ -12,7 +14,7 @@ const Swap: React.FC = () => {
       <div className={`${cssPrefix}-container`}>
         <Input value={'1'} />
         <Input value={'2'} />
-        {/* <button>Swap</button> */}
+        <Button label={SWAP} />
       </div>
     </div>
   );

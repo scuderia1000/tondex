@@ -2,6 +2,13 @@
   --input-bg-color: rgb(247, 248, 250);
   --active-bg-color: rgb(233, 234, 235);
   --hover-bg-color: rgb(206, 208, 217);
+  --disabled-bg-color: rgb(237, 238, 242);
+  --main-bg-color: #0088CC;
+  --main-bg-color-hover: #0072ab;
+  --color-main: #303757;
+  --color-black: #333;
+  --color-white: white;
+  --color-disabled: rgb(86, 90, 105);;
 }
 
 @font-face {
@@ -61,6 +68,5 @@ body,
   line-height: 20px;
   font-family: Mulish-Regular, sans-serif;
   -webkit-text-size-adjust: 100%;
-  color: #303757;
-  /*word-break: break-word;*/
+  color: var(--color-main);
 }
