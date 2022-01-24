@@ -3,7 +3,7 @@ import Input from '../../components/input/Input';
 import Button from '../../components/button/Button';
 import { SWAP } from '../../const';
 import tokens from '../../mock/tokens.json';
-import { ReactComponent as ArrowDown } from '../../components/assets/svg/arrow_downward.svg';
+import ChangeButton from '../../components/button/change/ChangeButton';
 import './Swap.css';
 
 const cssPrefix = 'swap';
@@ -19,12 +19,7 @@ const Swap: React.FC = () => {
       <div className={`${cssPrefix}-container`}>
         <div>
           <Input value={'1'} token={wethToken} />
-          <div className={`${cssPrefix} exchange-button-container`}>
-            <div className={`${cssPrefix} exchange-button`}>
-              <ArrowDown />
-            </div>
-          </div>
-          {/* <div className={`${cssPrefix} exchange-button`}>1</div> */}
+          <ChangeButton />
           <Input value={'2'} token={tonToken} />
         </div>
         <Button label={SWAP} />
