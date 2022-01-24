@@ -21,6 +21,12 @@
   cursor: pointer;
 }
 
+.exchange-button:active:not(:disabled) {
+  opacity: 0.85;
+  transform: translateY(1px);
+  box-shadow: none;
+}
+
 .arrow-swap {
   display: none;
 }
@@ -31,4 +37,10 @@
 
 .exchange-button:hover .arrow-swap {
   display: block;
+}
+
+.s {
+  opacity: 0.85;
+  transform: translateY(1px);
+  box-shadow: none;
 }

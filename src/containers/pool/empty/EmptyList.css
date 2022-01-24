@@ -1,0 +1,8 @@
+.pool-list--empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 20vh;
+  color: var(--color-disabled);
+  font-size: 18px;
+}

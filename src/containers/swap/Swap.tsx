@@ -1,9 +1,7 @@
 import React from 'react';
-import Input from '../../components/input/Input';
-import Button from '../../components/button/Button';
 import { SWAP } from '../../const';
 import tokens from '../../mock/tokens.json';
-import ChangeButton from '../../components/button/change/ChangeButton';
+import Exchange from '../exchange/Exchange';
 import './Swap.css';
 
 const cssPrefix = 'swap';
@@ -16,14 +14,7 @@ const Swap: React.FC = () => {
 
   return (
     <div className={cssPrefix}>
-      <div className={`${cssPrefix}-container`}>
-        <div>
-          <Input value={'1'} token={wethToken} />
-          <ChangeButton />
-          <Input value={'2'} token={tonToken} />
-        </div>
-        <Button label={SWAP} />
-      </div>
+      <Exchange buttonLabel={SWAP} firstToken={wethToken} secondToken={tonToken} />
     </div>
   );
 };

@@ -6,3 +6,7 @@ export interface ITokenInfo {
   chainId: number;
   logoURI: string;
 }
+
+export interface IUserPool {
+  symbol?: string;
+}

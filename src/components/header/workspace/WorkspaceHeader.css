@@ -4,15 +4,9 @@
   justify-content: flex-start;
   padding: 2px;
   margin-bottom: 12px;
-  /*box-shadow: 0 0 4px #00000040;*/
-  /*box-shadow: 0 2px 8px #00000026, 0 0 2px #00000040;*/
-  /*box-shadow: 0 8px 20px #00000026;*/
-  /*box-shadow: 0 0 2px #00000040, 0 2px 8px #00000026;*/
-  /*box-shadow: 0 8px 12px #7373731f;*/
-
 }
 
-.workspace-header__link {
+.link {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -26,11 +20,12 @@
   text-decoration: none;
   color: var(--main-bg-color);
 }
-.workspace-header__link:hover {
+
+.link:hover:not(.active):not(.disabled) {
   color: var(--color-black);
 }
 
-.workspace-header__link.active {
+.link.active {
   color: var(--color-white);
   background-color: var(--main-bg-color);
 }

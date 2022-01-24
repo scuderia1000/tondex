@@ -70,3 +70,16 @@ body,
   -webkit-text-size-adjust: 100%;
   color: var(--color-main);
 }
+
+.disabled {
+  color: var(--color-disabled)
+}
+
+input[type='number'] {
+  -moz-appearance:textfield;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}

@@ -1,7 +1,10 @@
 import React from 'react';
-import './Workspace.css';
+import { Route, Routes } from 'react-router-dom';
 import WorkspaceHeader from '../../components/header/workspace/WorkspaceHeader';
 import Swap from '../swap/Swap';
+import './Workspace.css';
+import Pool from '../pool/Pool';
+import AddPool from '../pool/add/AddPool';
 
 const cssPrefix = 'workspace';
 
@@ -12,7 +15,12 @@ const Workspace: React.FC = () => {
     <div className={cssPrefix}>
       <div className={`${cssPrefix}-container`}>
         <WorkspaceHeader />
-        <Swap />
+        <Routes>
+          <Route path="/" element={<Swap />} />
+          <Route path="pool" element={<Pool />} />
+          <Route path="pool/add" element={<AddPool />} />
+          <Route path="pool/remove" element={<AddPool />} />
+        </Routes>
       </div>
     </div>
   );

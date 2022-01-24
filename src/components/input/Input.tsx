@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Input.css';
 import CoinButton from '../button/coin/CoinButton';
 import { ITokenInfo } from '../../types';
@@ -12,13 +12,22 @@ const cssPrefix = 'input';
 const cssPrefixContainer = `${cssPrefix}-container`;
 
 const Input: React.FC<IPops> = ({ value, token }) => {
-  console.log('input');
+  const [inputValue, setInputValue] = useState(value);
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setInputValue(event.target.value);
+  };
 
   return (
     <div className={cssPrefix}>
       <div className={cssPrefixContainer}>
         <CoinButton token={token} />
-        <input className={`${cssPrefixContainer}--input`} value={value} />
+        <input
+          className={`${cssPrefixContainer}--input`}
+          value={inputValue}
+          onChange={handleChange}
+          type={'number'}
+        />
       </div>
       {/* <span className={`${cssPrefix}--info`}>Info</span> */}
     </div>

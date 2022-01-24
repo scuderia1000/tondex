@@ -1,0 +1,8 @@
+.exchange {
+  padding: 8px;
+}
+
+.exchange-container {
+  display: grid;
+  row-gap: 8px;
+}
