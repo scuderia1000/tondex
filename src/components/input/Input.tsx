@@ -21,7 +21,7 @@ const Input: React.FC<IPops> = ({ value, token }) => {
   return (
     <div className={cssPrefix}>
       <div className={cssPrefixContainer}>
-        <CoinButton token={token} />
+        <CoinButton symbol={token?.symbol} logoURI={token?.logoURI} />
         <input
           className={`${cssPrefixContainer}--input`}
           value={inputValue}

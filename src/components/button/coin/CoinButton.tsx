@@ -1,34 +1,30 @@
 import React, { useMemo } from 'react';
 import './CoinButton.css';
-import { ITokenInfo } from '../../../types';
 import { SelectToken } from '../../../const';
 
 interface IProps {
-  token?: ITokenInfo;
+  symbol?: string;
+  logoURI?: string;
 }
 
 const cssPrefix = 'coin-button';
 
-const CoinButton: React.FC<IProps> = ({ token }) => {
-  console.log('CoinButton');
-
+const CoinButton: React.FC<IProps> = ({ symbol, logoURI }) => {
   const tokenLabel = useMemo(() => {
-    if (!token?.symbol) {
+    if (!symbol) {
       return SelectToken;
     }
 
-    return token?.symbol;
-  }, [token?.symbol]);
+    return symbol;
+  }, [symbol]);
 
   const tokenImage = useMemo(() => {
-    if (!token?.logoURI) {
+    if (!logoURI) {
       return <></>;
     }
 
-    return (
-      <img className={`${cssPrefix}--image`} src={token.logoURI} alt={`${token?.symbol}-logo`} />
-    );
-  }, [token?.logoURI]);
+    return <img className={`${cssPrefix}--image`} src={logoURI} alt={`${symbol}-logo`} />;
+  }, [logoURI, symbol]);
 
   return (
     <button className={cssPrefix}>

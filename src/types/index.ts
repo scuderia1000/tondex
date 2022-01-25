@@ -10,3 +10,7 @@ export interface ITokenInfo {
 export interface IUserPool {
   symbol?: string;
 }
+
+export interface IFetchResponse<T> {
+  data: T;
+}

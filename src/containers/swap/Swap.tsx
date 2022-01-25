@@ -1,20 +1,23 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { SWAP } from '../../const';
-import tokens from '../../mock/tokens.json';
 import Exchange from '../exchange/Exchange';
+import swapSelector from '../../store/swap/selectors';
 import './Swap.css';
+import tokensSelector from '../../store/tokens/selectors';
 
 const cssPrefix = 'swap';
 
-const wethToken = tokens.find((token) => token.symbol === 'WETH');
-const tonToken = tokens.find((token) => token.symbol === 'TONCOIN');
-
 const Swap: React.FC = () => {
-  console.log('swap');
+  const inputToken = useSelector(swapSelector.inputToken);
+  const outputToken = useSelector(swapSelector.outputToken);
+
+  const inTokenInfo = useSelector(tokensSelector.tokensByAddress)[inputToken?.address];
+  const outTokenInfo = useSelector(tokensSelector.tokensByAddress)[outputToken.address];
 
   return (
     <div className={cssPrefix}>
-      <Exchange buttonLabel={SWAP} firstToken={wethToken} secondToken={tonToken} />
+      <Exchange buttonLabel={SWAP} inputTokenInfo={inTokenInfo} outputTokenInfo={outTokenInfo} />
     </div>
   );
 };
