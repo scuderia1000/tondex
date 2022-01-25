@@ -3,8 +3,8 @@ import { useSelector } from 'react-redux';
 import { SWAP } from '../../const';
 import Exchange from '../exchange/Exchange';
 import swapSelector from '../../store/swap/selectors';
-import './Swap.css';
 import tokensSelector from '../../store/tokens/selectors';
+import './Swap.css';
 
 const cssPrefix = 'swap';
 

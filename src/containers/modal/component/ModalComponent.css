@@ -1,0 +1,29 @@
+.backdrop {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  bottom: 0;
+  left: 0;
+  position: fixed;
+  right: 0;
+  top: 0;
+  z-index: 2;
+  background-color: rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+}
+
+.modal {
+  /*display: flex;*/
+  padding: 20px;
+  width: 60vw;
+  height: 80vh;
+  border-radius: 20px;
+  border: 1px solid var(--input-bg-color);
+  background-color: var(--color-white);
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}

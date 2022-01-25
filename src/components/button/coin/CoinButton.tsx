@@ -5,11 +5,12 @@ import { SelectToken } from '../../../const';
 interface IProps {
   symbol?: string;
   logoURI?: string;
+  onSelectTokenClick?(): void;
 }
 
 const cssPrefix = 'coin-button';
 
-const CoinButton: React.FC<IProps> = ({ symbol, logoURI }) => {
+const CoinButton: React.FC<IProps> = ({ symbol, logoURI, onSelectTokenClick }) => {
   const tokenLabel = useMemo(() => {
     if (!symbol) {
       return SelectToken;
@@ -27,7 +28,7 @@ const CoinButton: React.FC<IProps> = ({ symbol, logoURI }) => {
   }, [logoURI, symbol]);
 
   return (
-    <button className={cssPrefix}>
+    <button className={cssPrefix} onClick={onSelectTokenClick}>
       {tokenImage}
       <span className={`${cssPrefix}--label`}>{tokenLabel}</span>
     </button>

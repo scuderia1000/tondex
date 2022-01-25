@@ -6,12 +6,13 @@ import { ITokenInfo } from '../../types';
 interface IPops {
   value?: string;
   token?: ITokenInfo;
+  onSelectTokenClick?(): void;
 }
 
 const cssPrefix = 'input';
 const cssPrefixContainer = `${cssPrefix}-container`;
 
-const Input: React.FC<IPops> = ({ value, token }) => {
+const Input: React.FC<IPops> = ({ value, token, onSelectTokenClick }) => {
   const [inputValue, setInputValue] = useState(value);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -21,7 +22,11 @@ const Input: React.FC<IPops> = ({ value, token }) => {
   return (
     <div className={cssPrefix}>
       <div className={cssPrefixContainer}>
-        <CoinButton symbol={token?.symbol} logoURI={token?.logoURI} />
+        <CoinButton
+          symbol={token?.symbol}
+          logoURI={token?.logoURI}
+          onSelectTokenClick={onSelectTokenClick}
+        />
         <input
           className={`${cssPrefixContainer}--input`}
           value={inputValue}
