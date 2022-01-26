@@ -1,10 +1,7 @@
 .backdrop {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  position: fixed;
   bottom: 0;
   left: 0;
-  position: fixed;
   right: 0;
   top: 0;
   z-index: 2;
@@ -13,10 +10,23 @@
 }
 
 .modal {
-  /*display: flex;*/
+  --modal-width: 60vw;
+  --modal-height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  left: calc(calc(100vw - var(--modal-width)) / 2);
+  top: calc(calc(100vh - var(--modal-height)) / 2);
+  /*max-width: 500px;*/
+  /*left: calc(100vw - calc(var(--modal-width) + var(--modal-width) / 2));*/
+  /*width: clamp(200px, 50% 500px);*/
+  z-index: 2;
+}
+.modal-container {
   padding: 20px;
-  width: 60vw;
-  height: 80vh;
+  width: var(--modal-width);
+  height: var(--modal-height);
   border-radius: 20px;
   border: 1px solid var(--input-bg-color);
   background-color: var(--color-white);

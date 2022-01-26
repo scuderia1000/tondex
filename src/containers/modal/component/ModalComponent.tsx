@@ -13,8 +13,9 @@ const ModalComponent: React.FC<IProps> = ({ toggleVisibility, modalContent, labe
 
   return (
     <>
-      <div className="backdrop" onClick={toggleVisibility}>
-        <div className={cssPrefix}>
+      <div className="backdrop" onClick={toggleVisibility} />
+      <div className={cssPrefix}>
+        <div className={`${cssPrefix}-container`}>
           <div className={`${cssPrefix}-header`}>
             <span>{label}</span>
             <IconButton icon={<Close />} />
