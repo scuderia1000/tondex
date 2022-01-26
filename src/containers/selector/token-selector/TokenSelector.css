@@ -1,3 +1,14 @@
+.token-selector {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  row-gap: 16px;
+  height: 100%;
+}
+
+.token-selector .input-container {
+  padding: 0 20px;
+}
+
 .token-selector input {
   font-size: var(--font-size-sm);
   font-weight: 600;

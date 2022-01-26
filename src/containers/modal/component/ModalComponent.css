@@ -16,17 +16,15 @@
   align-items: center;
   justify-content: center;
   position: fixed;
-  left: calc(calc(100vw - var(--modal-width)) / 2);
+  left: calc(calc(100vw - min(500px, var(--modal-width))) / 2);
   top: calc(calc(100vh - var(--modal-height)) / 2);
-  /*max-width: 500px;*/
-  /*left: calc(100vw - calc(var(--modal-width) + var(--modal-width) / 2));*/
-  /*width: clamp(200px, 50% 500px);*/
   z-index: 2;
 }
 .modal-container {
-  padding: 20px;
   width: var(--modal-width);
+  max-width: 500px;
   height: var(--modal-height);
+  max-height: var(--modal-height);
   border-radius: 20px;
   border: 1px solid var(--input-bg-color);
   background-color: var(--color-white);
@@ -36,7 +34,12 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  padding: 20px 20px 0 20px;
   font-size: var(--font-size-sm);
   font-weight: 600;
   margin-bottom: 16px;
+}
+
+.modal-content {
+  height: calc(var(--modal-height) - 80px);
 }
