@@ -16,22 +16,21 @@
 }
 
 .input-container--input {
-  /*color: rgb(0, 0, 0);*/
   width: 0;
   min-width: 120px;
-  /*position: relative;*/
   flex: 1 1 auto;
-  /*width: 100%;*/
   padding: 0;
-  /*margin-left: 12px;*/
   font-weight: 500;
   outline: none;
   border: none;
-  /*background-color: rgb(247, 248, 250);*/
   font-size: 28px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   text-align: right;
   background-color: var(--input-bg-color);
+}
+
+.input-container--input.left {
+  text-align: left;
 }

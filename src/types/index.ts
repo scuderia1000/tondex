@@ -1,3 +1,5 @@
+import React from 'react';
+
 export interface ITokenInfo {
   name: string;
   address: string;
@@ -13,4 +15,12 @@ export interface IUserPool {
 
 export interface IFetchResponse<T> {
   data: T;
+}
+
+export interface IInputEventHandler<T> {
+  (event: React.ChangeEvent<HTMLInputElement>, args?: T): void;
+}
+
+export interface IInputChangeArgs {
+  value: string;
 }

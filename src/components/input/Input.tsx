@@ -1,37 +1,47 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './Input.css';
-import CoinButton from '../button/coin/CoinButton';
-import { ITokenInfo } from '../../types';
+import { IInputChangeArgs, IInputEventHandler } from '../../types';
 
 interface IPops {
+  /** Input type */
+  type?: 'text' | 'number';
+  /** Additional classname */
+  className?: string;
+  /** Is input disabled */
+  disabled?: boolean;
+  placeholder?: string;
   value?: string;
-  token?: ITokenInfo;
-  onSelectTokenClick?(): void;
+  leftComponent?: React.ReactNode;
+  onChange?: IInputEventHandler<IInputChangeArgs>;
+  textAlign?: 'left' | 'right';
 }
 
 const cssPrefix = 'input';
 const cssPrefixContainer = `${cssPrefix}-container`;
 
-const Input: React.FC<IPops> = ({ value, token, onSelectTokenClick }) => {
-  const [inputValue, setInputValue] = useState(value);
-
+const Input: React.FC<IPops> = ({
+  type = 'text',
+  value,
+  onChange,
+  className = '',
+  leftComponent,
+  textAlign = 'right',
+}) => {
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setInputValue(event.target.value);
+    if (onChange) {
+      onChange(event, { value: event.target.value });
+    }
   };
 
   return (
-    <div className={cssPrefix}>
+    <div className={`${cssPrefix} ${className}`}>
       <div className={cssPrefixContainer}>
-        <CoinButton
-          symbol={token?.symbol}
-          logoURI={token?.logoURI}
-          onSelectTokenClick={onSelectTokenClick}
-        />
+        {leftComponent}
         <input
-          className={`${cssPrefixContainer}--input`}
-          value={inputValue}
+          className={`${cssPrefixContainer}--input ${textAlign}`}
+          type={type}
+          value={value}
           onChange={handleChange}
-          type={'number'}
         />
       </div>
       {/* <span className={`${cssPrefix}--info`}>Info</span> */}
