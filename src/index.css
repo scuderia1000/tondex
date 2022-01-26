@@ -12,6 +12,7 @@
   --color-disabled: rgb(86, 90, 105);
   /** Fonts */
   --font-size-default: 1rem;
+  --font-size-xs: 0.8rem;
   --font-size-sm: 1.1rem;
 }
 

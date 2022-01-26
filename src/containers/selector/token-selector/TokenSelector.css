@@ -12,6 +12,8 @@
 .token-selector input {
   font-size: var(--font-size-sm);
   font-weight: 600;
+  background-color: var(--disabled-bg-color);
+  border: 1px solid var(--disabled-bg-color);
 }
 
 .token-selector .input:focus {

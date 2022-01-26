@@ -5,7 +5,7 @@ export interface IListItem<T = {}> {
   id?: string;
   icon?: React.ReactNode;
   logoURI?: string;
-  caption?: string;
+  caption?: string | React.ReactNode;
   data?: T;
 }
 
@@ -19,7 +19,7 @@ const ListItem: React.FC<IProps> = ({ item }) => (
   <div className={cssPrefix}>
     {item.icon}
     {item.logoURI && (
-      <img className={`${cssPrefix}-image`} src={item.logoURI} alt={`${item.caption}-logo`} />
+      <img className={`${cssPrefix}-image`} src={item.logoURI} alt={`${item.id}-logo`} />
     )}
     <div className={`${cssPrefix}-caption`}>{item.caption}</div>
   </div>

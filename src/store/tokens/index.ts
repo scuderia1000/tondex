@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { ITokensMap, ITokesState } from '../types';
 import { fetchTokens } from '../../api';
 import { ITokenInfo } from '../../types';
+import { unique } from '../../util';
 
 const initialState: ITokesState = {
   byAddress: {
@@ -30,11 +31,13 @@ export const slice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    // Add reducers for additional action types here, and handle loading state as needed
     builder.addCase(
       fetchTokensAsync.fulfilled,
       (state, { payload }: PayloadAction<ITokenInfo[]>) => {
-        state.byAddress = payload.reduce((acc, token) => ({ ...acc, [token.address]: token }), {});
+        const uniqueTokens = unique<ITokenInfo>(payload, 'name');
+        state.byAddress = uniqueTokens
+          .sort((a, b) => a.symbol.localeCompare(b.symbol))
+          .reduce((acc, token) => ({ ...acc, [token.address]: token }), {});
       },
     );
   },
