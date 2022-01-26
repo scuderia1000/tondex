@@ -1,0 +1,8 @@
+.token-selector input {
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+}
+
+.token-selector .input:focus {
+  border: 1px solid var(--hover-bg-color);
+}

@@ -1,5 +1,4 @@
 import React, { useCallback, useMemo, useState } from 'react';
-import Input from '../../components/input/Input';
 import ChangeButton from '../../components/button/change/ChangeButton';
 import Button from '../../components/button/Button';
 import { IInputChangeArgs, ITokenInfo } from '../../types';
@@ -9,6 +8,7 @@ import { useModal } from '../../hooks/useModal';
 import TokenSelector from '../selector/token-selector/TokenSelector';
 import { SelectToken } from '../../const';
 import CoinButton from '../../components/button/coin/CoinButton';
+import TokenInput from '../swap/input/TokenInput';
 
 interface IProps {
   inputTokenInfo?: ITokenInfo;
@@ -46,7 +46,7 @@ const Exchange: React.FC<IProps> = ({ buttonLabel, inputTokenInfo, outputTokenIn
     <div className={cssPrefix}>
       <div className={`${cssPrefix}-container`}>
         <div>
-          <Input
+          <TokenInput
             value={inputValue}
             type={'number'}
             onChange={handleInputValueChange}
@@ -59,7 +59,7 @@ const Exchange: React.FC<IProps> = ({ buttonLabel, inputTokenInfo, outputTokenIn
             }
           />
           <ChangeButton />
-          <Input
+          <TokenInput
             value={outputValue}
             type={'number'}
             onChange={handleOutputValueChange}

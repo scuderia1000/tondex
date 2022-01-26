@@ -1,36 +1,20 @@
-.input {
-  display: flex;
-  flex-direction: column;
-  border-radius: 16px;
-  background-color: var(--input-bg-color);
-  z-index: 1;
-}
-
 .input-container {
   display: flex;
-  flex-wrap: wrap;
   align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-  padding: 1rem;
+  justify-content: center;
 }
 
-.input-container--input {
-  width: 0;
+.input {
+  width: 100%;
   min-width: 120px;
-  flex: 1 1 auto;
-  padding: 0;
-  font-weight: 500;
+  padding: 16px;
+  border-radius: 16px;
+  background-color: var(--input-bg-color);
   outline: none;
   border: none;
-  font-size: 28px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
   text-align: right;
-  background-color: var(--input-bg-color);
 }
 
-.input-container--input.left {
+.input.left {
   text-align: left;
 }
