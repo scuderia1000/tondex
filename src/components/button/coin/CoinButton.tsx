@@ -1,6 +1,7 @@
 import React, { useMemo } from 'react';
 import './CoinButton.css';
 import { SelectToken } from '../../../const';
+import ImageFallback from '../../image/ImageFallback';
 
 interface IProps {
   symbol?: string;
@@ -24,7 +25,7 @@ const CoinButton: React.FC<IProps> = ({ symbol, logoURI, onSelectTokenClick }) =
       return <></>;
     }
 
-    return <img className={`${cssPrefix}--image`} src={logoURI} alt={`${symbol}-logo`} />;
+    return <ImageFallback src={logoURI} alt={`${symbol}-logo`} />;
   }, [logoURI, symbol]);
 
   return (

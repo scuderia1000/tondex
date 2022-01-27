@@ -36,9 +36,6 @@
   font-size: var(--font-size-sm);
 }
 
-.coin-button--image {
-  width: 24px;
-  height: 24px;
+.coin-button .image {
   margin-right: 8px;
-  border-radius: 50%;
 }

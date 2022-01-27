@@ -10,9 +10,6 @@
   background-color: var(--hover-bg-color);
 }
 
-.list-item-image {
-  width: 24px;
-  height: 24px;
+.list-item .image {
   margin-right: 12px;
-  border-radius: 50%;
 }

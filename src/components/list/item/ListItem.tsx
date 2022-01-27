@@ -1,4 +1,5 @@
 import React from 'react';
+import ImageFallback from '../../image/ImageFallback';
 import './ListItem.css';
 
 export interface IListItem<T = {}> {
@@ -18,9 +19,7 @@ const cssPrefix = 'list-item';
 const ListItem: React.FC<IProps> = ({ item }) => (
   <div className={cssPrefix}>
     {item.icon}
-    {item.logoURI && (
-      <img className={`${cssPrefix}-image`} src={item.logoURI} alt={`${item.id}-logo`} />
-    )}
+    {item.logoURI && <ImageFallback src={item.logoURI} alt={`${item.id}-logo`} />}
     <div className={`${cssPrefix}-caption`}>{item.caption}</div>
   </div>
 );
