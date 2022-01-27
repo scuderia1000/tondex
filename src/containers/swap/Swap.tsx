@@ -1,19 +1,19 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
 import { SWAP } from '../../const';
 import Exchange from '../exchange/Exchange';
 import swapSelector from '../../store/swap/selectors';
 import tokensSelector from '../../store/tokens/selectors';
 import './Swap.css';
+import { useAppSelector } from '../../hooks/hooks';
 
 const cssPrefix = 'swap';
 
 const Swap: React.FC = () => {
-  const inputToken = useSelector(swapSelector.inputToken);
-  const outputToken = useSelector(swapSelector.outputToken);
+  const inputToken = useAppSelector(swapSelector.inputToken);
+  const outputToken = useAppSelector(swapSelector.outputToken);
 
-  const inTokenInfo = useSelector(tokensSelector.tokensByAddress)[inputToken?.address];
-  const outTokenInfo = useSelector(tokensSelector.tokensByAddress)[outputToken.address];
+  const inTokenInfo = useAppSelector((state) => tokensSelector.tokenByAddress(state, inputToken));
+  const outTokenInfo = useAppSelector((state) => tokensSelector.tokenByAddress(state, outputToken));
 
   return (
     <div className={cssPrefix}>

@@ -1,16 +1,20 @@
 import React, { useCallback, useMemo, useState } from 'react';
 import './TokenSelector.css';
 import Input from '../../../components/input/Input';
-import { IInputChangeArgs, ITokenInfo } from '../../../types';
+import { IInputChangeArgs, ITokenInfo, MouseEvent } from '../../../types';
 import List from '../../../components/list/List';
 import { useAppSelector } from '../../../hooks/hooks';
 import tokensSelector from '../../../store/tokens/selectors';
 import { IListItem } from '../../../components/list/item/ListItem';
 import TokenCaption from './caption/TokenCaption';
 
+interface IProps {
+  onSelectToken: (item?: IListItem<ITokenInfo>) => void;
+}
+
 const cssPrefix = 'token-selector';
 
-const TokenSelector: React.FC = () => {
+const TokenSelector: React.FC<IProps> = ({ onSelectToken }) => {
   const tokensByAddress = useAppSelector(tokensSelector.tokensByAddress);
   const [value, setValue] = useState('');
 
@@ -40,10 +44,17 @@ const TokenSelector: React.FC = () => {
     [],
   );
 
+  const handleItemClick = useCallback(
+    (event: MouseEvent, item?: IListItem<ITokenInfo>) => {
+      onSelectToken(item);
+    },
+    [onSelectToken],
+  );
+
   return (
     <div className={cssPrefix}>
       <Input value={value} onChange={handleChangeInputValue} textAlign={'left'} />
-      <List items={tokens} />
+      <List items={tokens} onItemClick={handleItemClick} />
     </div>
   );
 };

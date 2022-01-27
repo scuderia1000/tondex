@@ -1,15 +1,12 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { IExchangeTokenInfo, ISwapState } from '../types';
+import { IExchangeState } from '../types';
+import { EFieldType } from '../../types';
+import { TONCOIN_ADDRESS } from '../../const';
 
-const initialState: ISwapState = {
-  in: {
-    symbol: 'TONCOIN',
-    address: '0x582d872a1b094fc48f5de31d3b73f2d9be47def1',
-  },
-  out: {
-    symbol: '',
-    address: '',
-  },
+const initialState: IExchangeState = {
+  in: TONCOIN_ADDRESS,
+  out: '',
+  changedField: EFieldType.IN,
   value: '0',
 };
 
@@ -17,18 +14,24 @@ export const slice = createSlice({
   name: 'swap',
   initialState,
   reducers: {
-    setInputToken(state: ISwapState, { payload }: PayloadAction<IExchangeTokenInfo>) {
+    setInputToken(state: IExchangeState, { payload }: PayloadAction<string>) {
       state.in = payload;
     },
-    setOutputToken(state: ISwapState, { payload }: PayloadAction<IExchangeTokenInfo>) {
+    setOutputToken(state: IExchangeState, { payload }: PayloadAction<string>) {
       state.out = payload;
     },
-    setValue(state: ISwapState, { payload }: PayloadAction<string>) {
+    setFieldType(state: IExchangeState, { payload }: PayloadAction<EFieldType>) {
+      state.changedField = payload;
+    },
+    setValue(state: IExchangeState, { payload }: PayloadAction<string>) {
       state.value = payload;
+    },
+    clear() {
+      return initialState;
     },
   },
 });
 
-export const { setInputToken, setOutputToken, setValue } = slice.actions;
+export const { setInputToken, setOutputToken, setFieldType, setValue, clear } = slice.actions;
 
 export default slice.reducer;

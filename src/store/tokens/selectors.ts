@@ -5,6 +5,8 @@ import { ITokenInfo } from '../../types';
 
 const tokens = (state: RootState): ITokesState => state.tokens;
 const tokensByAddress = (state: RootState): ITokensMap => tokens(state).byAddress;
+const tokenByAddress = (state: RootState, address: string): ITokenInfo =>
+  tokensByAddress(state)[address];
 
 const tokenBySymbol = createSelector(
   [tokensByAddress, (state: RootState, tokenSymbol: string) => tokenSymbol],
@@ -16,4 +18,5 @@ export default {
   tokens,
   tokensByAddress,
   tokenBySymbol,
+  tokenByAddress,
 };

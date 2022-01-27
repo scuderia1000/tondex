@@ -1,4 +1,4 @@
-import { ITokenInfo } from '../types';
+import { EFieldType, ITokenInfo } from '../types';
 
 export interface ITokensMap {
   [key: string]: ITokenInfo;
@@ -8,10 +8,9 @@ export interface ITokesState {
   byAddress: ITokensMap;
 }
 
-export type IExchangeTokenInfo = Pick<ITokenInfo, 'symbol' | 'address'>;
-
-export interface ISwapState {
-  in: IExchangeTokenInfo;
-  out: IExchangeTokenInfo;
+export interface IExchangeState {
+  in: string;
+  out: string;
+  changedField: EFieldType;
   value: string;
 }
