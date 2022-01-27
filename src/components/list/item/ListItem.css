@@ -7,9 +7,19 @@
 }
 
 .list-item:hover {
+  cursor: pointer;
   background-color: var(--hover-bg-color);
 }
 
 .list-item .image {
   margin-right: 12px;
+}
+
+.list-item--disabled {
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+.list-item--disabled:hover {
+  cursor: auto;
 }

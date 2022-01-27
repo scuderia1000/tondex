@@ -77,7 +77,7 @@ body,
 }
 
 .disabled {
-  color: var(--color-disabled)
+  color: var(--color-disabled);
 }
 
 input[type='number'] {

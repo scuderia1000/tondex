@@ -76,9 +76,14 @@ const Exchange: React.FC<IProps> = ({ buttonLabel, inputTokenInfo, outputTokenIn
     [dispatch, toggleModalVisibility],
   );
 
+  const disabledItems = useMemo(
+    () => [inputTokenInfo?.address ?? '', outputTokenInfo?.address ?? ''],
+    [inputTokenInfo?.address, outputTokenInfo?.address],
+  );
+
   const tokenSelector = useMemo(
-    () => <TokenSelector onSelectToken={handleSelectToken} />,
-    [handleSelectToken],
+    () => <TokenSelector onSelectToken={handleSelectToken} disabledItems={disabledItems} />,
+    [disabledItems, handleSelectToken],
   );
 
   useEffect(

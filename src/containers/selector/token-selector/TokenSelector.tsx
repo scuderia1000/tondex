@@ -10,11 +10,12 @@ import TokenCaption from './caption/TokenCaption';
 
 interface IProps {
   onSelectToken: (item?: IListItem<ITokenInfo>) => void;
+  disabledItems?: string[];
 }
 
 const cssPrefix = 'token-selector';
 
-const TokenSelector: React.FC<IProps> = ({ onSelectToken }) => {
+const TokenSelector: React.FC<IProps> = ({ onSelectToken, disabledItems }) => {
   const tokensByAddress = useAppSelector(tokensSelector.tokensByAddress);
   const [value, setValue] = useState('');
 
@@ -25,6 +26,7 @@ const TokenSelector: React.FC<IProps> = ({ onSelectToken }) => {
           id: address,
           caption: <TokenCaption token={tokensByAddress[address]} />,
           logoURI: tokensByAddress[address].logoURI,
+          disabled: disabledItems?.includes(address),
           data: tokensByAddress[address],
         }))
         .filter((listItem: IListItem<ITokenInfo>) =>
@@ -33,7 +35,7 @@ const TokenSelector: React.FC<IProps> = ({ onSelectToken }) => {
               listItem.data?.symbol.toLocaleLowerCase().includes(value)
             : true,
         ),
-    [tokensByAddress, value],
+    [disabledItems, tokensByAddress, value],
   );
 
   const handleChangeInputValue = useCallback(

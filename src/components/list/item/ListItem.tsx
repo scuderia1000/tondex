@@ -1,4 +1,5 @@
 import React from 'react';
+import classNames from 'classnames';
 import ImageFallback from '../../image/ImageFallback';
 import './ListItem.css';
 import { IMouseEventHandler, ITokenInfo, MouseEvent } from '../../../types';
@@ -20,6 +21,11 @@ interface IProps {
 const cssPrefix = 'list-item';
 
 const ListItem: React.FC<IProps> = ({ item, onItemClick }) => {
+  const classes = classNames({
+    [cssPrefix]: true,
+    [`${cssPrefix}--disabled`]: item.disabled,
+  });
+
   const onClick = (event: MouseEvent) => {
     if (item.disabled) {
       return;
@@ -28,7 +34,7 @@ const ListItem: React.FC<IProps> = ({ item, onItemClick }) => {
   };
 
   return (
-    <div className={cssPrefix} onClick={onClick}>
+    <div className={classes} onClick={onClick}>
       {item.icon}
       {item.logoURI && <ImageFallback src={item.logoURI} alt={`${item.id}-logo`} />}
       <div className={`${cssPrefix}-caption`}>{item.caption}</div>
