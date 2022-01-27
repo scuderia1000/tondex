@@ -6,6 +6,8 @@ import { useAppSelector } from '../../../hooks/hooks';
 import './AddPool.css';
 import swapSelector from '../../../store/swap/selectors';
 
+const cssPrefix = 'add-pool';
+
 const AddPool: React.FC = () => {
   const inputToken = useAppSelector(swapSelector.inputToken);
   const outputToken = useAppSelector(swapSelector.outputToken);
@@ -14,13 +16,13 @@ const AddPool: React.FC = () => {
   const outTokenInfo = useAppSelector((state) => tokensSelector.tokenByAddress(state, outputToken));
 
   return (
-    <>
+    <div className={cssPrefix}>
       <Exchange
         buttonLabel={AddLiquidity}
         inputTokenInfo={inTokenInfo}
         outputTokenInfo={outTokenInfo}
       />
-    </>
+    </div>
   );
 };
 

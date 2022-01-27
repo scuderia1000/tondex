@@ -37,7 +37,7 @@ export const slice = createSlice({
         const uniqueTokens = unique<ITokenInfo>(payload, 'name');
         state.byAddress = uniqueTokens
           .sort((a, b) => a.symbol.localeCompare(b.symbol))
-          .reduce((acc, token) => ({ ...acc, [token.address]: token }), {});
+          .reduce((acc, token) => ({ ...acc, [token.address || token.symbol]: token }), {});
       },
     );
   },

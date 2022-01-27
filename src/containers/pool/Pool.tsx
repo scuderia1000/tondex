@@ -8,8 +8,6 @@ export const cssPrefix = 'pool';
 export const cssPrefixPools = `${cssPrefix}-list`;
 
 const Pool: React.FC = () => {
-  console.log('pool');
-
   const isRemoveDisable = true;
   const userPools: IUserPool[] = [];
   const pools = useMemo(

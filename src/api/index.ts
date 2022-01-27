@@ -1,11 +1,11 @@
 import { IFetchResponse, ITokenInfo } from '../types';
-import tokens from '../mock/tokens.json';
+import { price } from '../mock/price';
 
 const fetch = <T>(responseData: T): Promise<T> =>
   new Promise<T>((resolve) => setTimeout(() => resolve(responseData), 500));
 
 export const fetchTokens = async () => {
-  const result = await fetch<IFetchResponse<ITokenInfo[]>>({ data: tokens });
+  const result = await fetch<IFetchResponse<ITokenInfo[]>>({ data: price });
   return result;
 };
 

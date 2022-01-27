@@ -2,11 +2,15 @@ import React from 'react';
 
 export interface ITokenInfo {
   name: string;
-  address: string;
   symbol: string;
-  decimals: number;
-  chainId: number;
   logoURI: string;
+  address?: string;
+  id?: string;
+  price?: number;
+  priceBtc?: number;
+  decimals?: number;
+  rank?: number;
+  chainId?: number;
 }
 
 export interface IUserPool {
