@@ -20,11 +20,17 @@ interface IProps {
   inputTokenInfo?: ITokenInfo;
   outputTokenInfo?: ITokenInfo;
   buttonLabel?: string;
+  onConfirmClick?: () => void;
 }
 
 const cssPrefix = 'exchange';
 
-const Exchange: React.FC<IProps> = ({ buttonLabel, inputTokenInfo, outputTokenInfo }) => {
+const Exchange: React.FC<IProps> = ({
+  buttonLabel,
+  inputTokenInfo,
+  outputTokenInfo,
+  onConfirmClick,
+}) => {
   const dispatch = useAppDispatch();
 
   const [modalIsVisible, toggleModalVisibility] = useModal();
@@ -36,30 +42,34 @@ const Exchange: React.FC<IProps> = ({ buttonLabel, inputTokenInfo, outputTokenIn
   const [outputValue, setOutputValue] = useState('');
   const [clickedButton, setClickedButton] = useState<EFieldType>(EFieldType.IN);
 
-  const handleInputValueChange = useCallback(
-    (event: React.ChangeEvent<HTMLInputElement>, args?: IInputChangeArgs) => {
-      const value = args?.value ?? '';
-      setInputValue(value);
+  const inputChange = useCallback(
+    (fieldType: EFieldType, value = '') => {
+      if (fieldType === EFieldType.IN) {
+        setInputValue(value);
+      } else {
+        setOutputValue(value);
+      }
       batch(() => {
         dispatch(swapActions.setValue(value));
-        dispatch(setFieldType(EFieldType.IN));
+        dispatch(setFieldType(fieldType));
         dispatch(swapActions.loadPairPrice());
       });
     },
     [dispatch],
   );
 
+  const handleInputValueChange = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>, args?: IInputChangeArgs) => {
+      inputChange(EFieldType.IN, args?.value);
+    },
+    [inputChange],
+  );
+
   const handleOutputValueChange = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>, args?: IInputChangeArgs) => {
-      const value = args?.value ?? '';
-      setOutputValue(value);
-      batch(() => {
-        dispatch(swapActions.setValue(value));
-        dispatch(setFieldType(EFieldType.OUT));
-        dispatch(swapActions.loadPairPrice());
-      });
+      inputChange(EFieldType.OUT, args?.value);
     },
-    [dispatch],
+    [inputChange],
   );
 
   const handleSelectToken = useCallback(
@@ -115,6 +125,11 @@ const Exchange: React.FC<IProps> = ({ buttonLabel, inputTokenInfo, outputTokenIn
     };
   }, [fieldType, inputValue, outputValue, swapPrice.price]);
 
+  const isConfirmButtonDisabled = useMemo(
+    () => !(Number(inOutValues.in) && Number(inOutValues.out)),
+    [inOutValues.in, inOutValues.out],
+  );
+
   useEffect(
     () => () => {
       dispatch(clear());
@@ -156,7 +171,7 @@ const Exchange: React.FC<IProps> = ({ buttonLabel, inputTokenInfo, outputTokenIn
             }
           />
         </div>
-        <Button label={buttonLabel} />
+        <Button label={buttonLabel} onClick={onConfirmClick} disabled={isConfirmButtonDisabled} />
       </div>
       <Modal
         isVisible={modalIsVisible}
