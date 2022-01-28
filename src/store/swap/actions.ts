@@ -52,10 +52,11 @@ const updatePairPriceByPool =
     const outTokenAddress = userPools.secondToken.address;
     const inAmount = userPools.firstToken.tokensAmount;
     const outAmount = userPools.secondToken.tokensAmount;
-    if (!inTokenAddress || !outTokenAddress || !inAmount || !outAmount) return;
 
     const inToken = tokensSelector.tokenByAddress(state, inTokenAddress);
     const outToken = tokensSelector.tokenByAddress(state, outTokenAddress);
+    if (!inTokenAddress || !outTokenAddress || !inAmount || !outAmount || !inToken || !outToken)
+      return;
 
     const price: IPrice = {
       pair: pairTemplate(inToken.symbol, outToken.symbol),

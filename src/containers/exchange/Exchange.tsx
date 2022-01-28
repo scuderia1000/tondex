@@ -22,6 +22,8 @@ interface IProps {
   confirmLabel?: string;
   onConfirmClick?: () => void;
   isCoinButtonsDisabled?: boolean;
+  inMaxValue?: string;
+  outMaxValue?: string;
 }
 
 const cssPrefix = 'exchange';
@@ -32,6 +34,8 @@ const Exchange: React.FC<IProps> = ({
   outputTokenInfo,
   onConfirmClick,
   isCoinButtonsDisabled,
+  inMaxValue,
+  outMaxValue,
 }) => {
   const dispatch = useAppDispatch();
 
@@ -147,6 +151,7 @@ const Exchange: React.FC<IProps> = ({
             value={inOutValues.in}
             price={swapPrice.inCostUSD}
             onChange={handleInputValueChange}
+            max={inMaxValue}
             leftComponent={
               <CoinButton
                 disabled={isCoinButtonsDisabled}
@@ -163,6 +168,7 @@ const Exchange: React.FC<IProps> = ({
             value={inOutValues.out}
             price={swapPrice.outCostUSD}
             onChange={handleOutputValueChange}
+            max={outMaxValue}
             leftComponent={
               <CoinButton
                 disabled={isCoinButtonsDisabled}

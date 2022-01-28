@@ -38,6 +38,8 @@ const RemovePool: React.FC = () => {
         outputTokenInfo={outTokenInfo}
         onConfirmClick={handleRemovePool}
         isCoinButtonsDisabled={true}
+        inMaxValue={pool.firstToken.tokensAmount}
+        outMaxValue={pool.secondToken.tokensAmount}
       />
     </div>
   );

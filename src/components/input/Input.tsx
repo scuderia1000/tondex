@@ -13,6 +13,7 @@ export interface IInputProps {
   value?: string;
   onChange?: IInputEventHandler<IInputChangeArgs>;
   textAlign?: 'left' | 'right';
+  max?: string;
 }
 
 const cssPrefix = 'input';
@@ -25,10 +26,15 @@ const Input: React.FC<IInputProps> = ({
   className = '',
   textAlign = 'right',
   placeholder = '0.0',
+  max,
 }) => {
+  // TODO
+  const validate = (value: string): boolean => !max || Number(value) <= Number(max);
+
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (onChange) {
-      onChange(event, { value: event.target.value });
+    const { value } = event.target;
+    if (onChange && validate(value)) {
+      onChange(event, { value });
     }
   };
 
@@ -40,6 +46,7 @@ const Input: React.FC<IInputProps> = ({
         placeholder={placeholder}
         value={value}
         onChange={handleChange}
+        max={max}
       />
     </div>
   );

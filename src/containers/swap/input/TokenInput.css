@@ -31,3 +31,10 @@
   padding: 0 1rem 1rem;
   color: var(--color-grey);
 }
+
+.token-input--info-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
