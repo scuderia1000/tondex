@@ -36,22 +36,16 @@ const Exchange: React.FC<IProps> = ({
   const [modalIsVisible, toggleModalVisibility] = useModal();
 
   const fieldType = useAppSelector(swapSelector.fieldType);
+  const swapValue = useAppSelector(swapSelector.swapValue);
   const swapPrice = useAppSelector(swapSelector.price);
 
-  const [inputValue, setInputValue] = useState('');
-  const [outputValue, setOutputValue] = useState('');
   const [clickedButton, setClickedButton] = useState<EFieldType>(EFieldType.IN);
 
   const inputChange = useCallback(
-    (fieldType: EFieldType, value = '') => {
-      if (fieldType === EFieldType.IN) {
-        setInputValue(value);
-      } else {
-        setOutputValue(value);
-      }
+    (newFieldType: EFieldType, value = '') => {
       batch(() => {
         dispatch(swapActions.setValue(value));
-        dispatch(setFieldType(fieldType));
+        dispatch(setFieldType(newFieldType));
         dispatch(swapActions.loadPairPrice());
       });
     },
@@ -112,18 +106,19 @@ const Exchange: React.FC<IProps> = ({
   );
 
   const inOutValues = useMemo(() => {
-    const price = Number(swapPrice.price) ? swapPrice.price : '';
+    const quote = Number(swapPrice.price) ? swapPrice.price : '';
+    const swapAmount = Number(swapValue) ? swapValue : '';
     if (fieldType === EFieldType.OUT) {
       return {
-        in: price,
-        out: outputValue,
+        in: quote,
+        out: swapAmount,
       };
     }
     return {
-      in: inputValue,
-      out: price,
+      in: swapAmount,
+      out: quote,
     };
-  }, [fieldType, inputValue, outputValue, swapPrice.price]);
+  }, [fieldType, swapPrice.price, swapValue]);
 
   const isConfirmButtonDisabled = useMemo(
     () => !(Number(inOutValues.in) && Number(inOutValues.out)),
@@ -136,6 +131,10 @@ const Exchange: React.FC<IProps> = ({
     },
     [],
   );
+
+  useEffect(() => {
+    dispatch(swapActions.clearPrice());
+  }, [fieldType]);
 
   return (
     <div className={cssPrefix}>

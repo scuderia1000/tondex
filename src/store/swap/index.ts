@@ -53,17 +53,26 @@ export const slice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder
-      .addCase(fetchTokensPriceAsync.fulfilled, (state, { payload }: PayloadAction<IPrice>) => {
+    builder.addCase(
+      fetchTokensPriceAsync.fulfilled,
+      (state, { payload }: PayloadAction<IPrice>) => {
         state.price = payload;
-      })
-      .addCase(fetchTokensPriceAsync.pending, (state) => {
-        state.price = initialState.price;
-      });
+      },
+    );
+    // .addCase(fetchTokensPriceAsync.pending, (state) => {
+    //   state.price = initialState.price;
+    // });
   },
 });
 
-export const { setInputToken, setOutputToken, setFieldType, setValue, clear, setPrice } =
-  slice.actions;
+export const {
+  setInputToken,
+  setOutputToken,
+  setFieldType,
+  setValue,
+  clear,
+  setPrice,
+  clearPrice,
+} = slice.actions;
 
 export default slice.reducer;

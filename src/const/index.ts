@@ -4,6 +4,7 @@ export const POOL = 'Pool';
 export const Add = 'Add';
 export const Remove = 'Remove';
 export const AddLiquidity = 'Add liquidity';
+export const RemoveLiquidity = 'Remove liquidity';
 export const SelectToken = 'Select Token';
 export const EnterTokenName = 'Token name';
 
@@ -14,3 +15,6 @@ export const getBinanceTickerPriceUrl = (firstTokenSymbol: string, secondTokenSy
 
 export const DIGITS_COUNT = 9;
 export const TAX = 0.01;
+
+export const pairTemplate = (firstSymbol: string, secondSymbol: string): string =>
+  `${firstSymbol} --> ${secondSymbol}`;

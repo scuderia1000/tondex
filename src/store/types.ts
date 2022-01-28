@@ -29,10 +29,10 @@ export interface IExchangeState extends ITokenPairs {
 }
 
 export interface IPoolToken {
-  address?: string;
-  price?: string;
-  tokensAmount?: string;
-  timestamp?: number;
+  address: string;
+  price: string;
+  tokensAmount: string;
+  timestamp: number;
 }
 
 export interface IPool {

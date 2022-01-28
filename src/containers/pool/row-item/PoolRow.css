@@ -1,0 +1,34 @@
+.pool-row {
+  display: grid;
+  grid-template-columns: 36px 5fr repeat(2, 1fr);
+  padding: 0 12px;
+  gap: 1em;
+  font-weight: 600;
+}
+
+.pool-row--icons,
+.pool-row--symbols {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pool-row--icons > .image {
+  width: 18px;
+  height: 18px;
+  margin-right: 1px;
+}
+
+.pool-row--remove {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pool-row--icon {
+  border-radius: 50%;
+}
+
+.pool-row--icon:hover {
+  fill: var(--color-white);
+}

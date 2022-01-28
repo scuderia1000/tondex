@@ -1,5 +1,9 @@
 .pool-list {
   display: flex;
   flex-direction: column;
-  padding: 8px;
+  /*padding: 8px;*/
+}
+
+.pool-list .list-item {
+  padding: 0;
 }

@@ -45,7 +45,7 @@ export enum EFieldType {
 export interface ITokenPricePairs {
   inAddress: string;
   inSymbol: string;
-  outAddress?: string;
-  outSymbol?: string;
-  amount?: string;
+  outAddress: string;
+  outSymbol: string;
+  amount: string;
 }

@@ -1,7 +1,7 @@
 import { ITokenPricePairs } from '../types';
 import { IPrice } from '../store/types';
 import { price } from '../mock/price';
-import { DIGITS_COUNT, TAX } from '../const';
+import { DIGITS_COUNT, pairTemplate, TAX } from '../const';
 
 export const unique = <T>(array: T[], key: keyof T): T[] => {
   const seen = new Set();
@@ -14,6 +14,13 @@ export const unique = <T>(array: T[], key: keyof T): T[] => {
 export const getRandomNumber = (): number => {
   const array = new Uint32Array(1);
   return crypto.getRandomValues(array)[0];
+};
+
+export const toFixed = (value: number): string => {
+  const leftDigitsCount = String(value).split('.')?.[0].length;
+  const fixedNumber = DIGITS_COUNT - leftDigitsCount;
+
+  return value.toFixed(fixedNumber);
 };
 
 export const getPairPrices = (pair: ITokenPricePairs): IPrice => {
@@ -29,23 +36,15 @@ export const getPairPrices = (pair: ITokenPricePairs): IPrice => {
   });
   const amount = Number(pair.amount) ?? 1;
   const calculatedPrice = (Number(inPriceUSD) / Number(outPriceUSD)) * amount;
-  const leftDigitsCount = String(calculatedPrice).split('.')?.[0].length;
-  const fixedNumber = DIGITS_COUNT - leftDigitsCount;
-
   const inTaxUSD = Number(inPriceUSD) * amount * TAX;
   const inCostUSD = Number(inPriceUSD) * amount + inTaxUSD;
-  const inCostUSDLeftDigitsCount = String(inCostUSD).split('.')?.[0].length;
-  const inCostUSDFixedNumber = DIGITS_COUNT - inCostUSDLeftDigitsCount;
-
   const outCostUSD = Number(calculatedPrice) * Number(outPriceUSD);
-  const outCostUSDLeftDigitsCount = String(outCostUSD).split('.')?.[0].length;
-  const outCostUSDFixedNumber = DIGITS_COUNT - outCostUSDLeftDigitsCount;
 
   return {
-    pair: `${pair.inSymbol} --> ${pair.outSymbol}`,
+    pair: pairTemplate(pair.inSymbol, pair.outSymbol),
     amount: String(amount),
-    price: calculatedPrice.toFixed(fixedNumber),
-    inCostUSD: inCostUSD.toFixed(inCostUSDFixedNumber),
-    outCostUSD: outCostUSD.toFixed(outCostUSDFixedNumber),
+    price: toFixed(calculatedPrice),
+    inCostUSD: toFixed(inCostUSD),
+    outCostUSD: toFixed(outCostUSD),
   };
 };
