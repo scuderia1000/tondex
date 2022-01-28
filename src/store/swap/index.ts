@@ -43,17 +43,21 @@ export const slice = createSlice({
     setPrice(state: IExchangeState, { payload }: PayloadAction<IPrice>) {
       state.price = payload;
     },
+    clearPrice(state: IExchangeState) {
+      state.price = initialState.price;
+    },
     clear() {
       return initialState;
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(
-      fetchTokensPriceAsync.fulfilled,
-      (state, { payload }: PayloadAction<IPrice>) => {
+    builder
+      .addCase(fetchTokensPriceAsync.fulfilled, (state, { payload }: PayloadAction<IPrice>) => {
         state.price = payload;
-      },
-    );
+      })
+      .addCase(fetchTokensPriceAsync.pending, (state) => {
+        state.price = initialState.price;
+      });
   },
 });
 

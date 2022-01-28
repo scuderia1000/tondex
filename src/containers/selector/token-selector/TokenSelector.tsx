@@ -7,6 +7,7 @@ import { useAppSelector } from '../../../hooks/hooks';
 import tokensSelector from '../../../store/tokens/selectors';
 import { IListItem } from '../../../components/list/item/ListItem';
 import TokenCaption from './caption/TokenCaption';
+import { EnterTokenName } from '../../../const';
 
 interface IProps {
   onSelectToken: (item?: IListItem<ITokenInfo>) => void;
@@ -55,7 +56,12 @@ const TokenSelector: React.FC<IProps> = ({ onSelectToken, disabledItems }) => {
 
   return (
     <div className={cssPrefix}>
-      <Input value={value} onChange={handleChangeInputValue} textAlign={'left'} />
+      <Input
+        value={value}
+        onChange={handleChangeInputValue}
+        textAlign={'left'}
+        placeholder={EnterTokenName}
+      />
       <List items={tokens} onItemClick={handleItemClick} />
     </div>
   );

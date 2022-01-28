@@ -1,15 +1,15 @@
 import { createSelector } from '@reduxjs/toolkit';
 import { ITokensMap, ITokesState } from '../types';
-import { RootState } from '../index';
+import { IRootState } from '../index';
 import { ITokenInfo } from '../../types';
 
-const tokens = (state: RootState): ITokesState => state.tokens;
-const tokensByAddress = (state: RootState): ITokensMap => tokens(state).byAddress;
-const tokenByAddress = (state: RootState, address: string): ITokenInfo =>
+const tokens = (state: IRootState): ITokesState => state.tokens;
+const tokensByAddress = (state: IRootState): ITokensMap => tokens(state).byAddress;
+const tokenByAddress = (state: IRootState, address: string): ITokenInfo =>
   tokensByAddress(state)[address];
 
 const tokenBySymbol = createSelector(
-  [tokensByAddress, (state: RootState, tokenSymbol: string) => tokenSymbol],
+  [tokensByAddress, (state: IRootState, tokenSymbol: string) => tokenSymbol],
   (tokensByAddress: ITokensMap, tokenSymbol) =>
     Object.values(tokensByAddress).find((token: ITokenInfo) => token.symbol === tokenSymbol),
 );

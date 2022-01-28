@@ -1,4 +1,5 @@
 import { EFieldType, ITokenInfo } from '../types';
+import { IRootState } from './index';
 
 export interface ITokensMap {
   [key: string]: ITokenInfo;
@@ -44,3 +45,6 @@ export interface IUserPool {
 export interface IUserState {
   pools: IUserPool;
 }
+
+export type IGetStateFunction<T> = () => T;
+export type IGetState = IGetStateFunction<IRootState>;

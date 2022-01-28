@@ -24,6 +24,7 @@ const Input: React.FC<IInputProps> = ({
   onChange,
   className = '',
   textAlign = 'right',
+  placeholder = '0.0',
 }) => {
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (onChange) {
@@ -36,6 +37,7 @@ const Input: React.FC<IInputProps> = ({
       <input
         className={`${cssPrefix} ${textAlign}`}
         type={type}
+        placeholder={placeholder}
         value={value}
         onChange={handleChange}
       />

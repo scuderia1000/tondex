@@ -1,4 +1,7 @@
-export const getIcon = (name: string) => require(`../components/assets/svg/${name}.svg`);
+import { ITokenPricePairs } from '../types';
+import { IPrice } from '../store/types';
+import { price } from '../mock/price';
+import { DIGITS_COUNT } from '../const';
 
 export const unique = <T>(array: T[], key: keyof T): T[] => {
   const seen = new Set();
@@ -13,6 +16,25 @@ export const getRandomNumber = (): number => {
   return crypto.getRandomValues(array)[0];
 };
 
-export default {
-  getIcon,
+export const getPairPrices = (pair: ITokenPricePairs): IPrice => {
+  let inPriceUSD = '';
+  let outPriceUSD = '';
+  price.some((item) => {
+    if (item.address === pair.inAddress) {
+      inPriceUSD = String(item.price);
+    } else if (item.address === pair.outAddress) {
+      outPriceUSD = String(item.price);
+    }
+    return !!inPriceUSD && !!outPriceUSD;
+  });
+  const amount = Number(pair.amount) ?? 1;
+  const calculatedPrice = (Number(inPriceUSD) / Number(outPriceUSD)) * amount;
+  const leftDigitsCount = String(calculatedPrice).split('.')?.[0].length;
+  const fixedNumber = DIGITS_COUNT - leftDigitsCount;
+
+  return {
+    pair: `${pair.inSymbol} --> ${pair.outSymbol}`,
+    amount: String(amount),
+    price: calculatedPrice.toFixed(fixedNumber),
+  };
 };

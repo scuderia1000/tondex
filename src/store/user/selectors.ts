@@ -1,9 +1,9 @@
 import { IPool, IUserPool, IUserState } from '../types';
-import { RootState } from '../index';
+import { IRootState } from '../index';
 
-const user = (state: RootState): IUserState => state.user;
-const pools = (state: RootState): IUserPool => user(state).pools;
-const poolById = (state: RootState, id: string): IPool => pools(state)[id];
+const user = (state: IRootState): IUserState => state.user;
+const pools = (state: IRootState): IUserPool => user(state).pools;
+const poolById = (state: IRootState, id: string): IPool => pools(state)[id];
 
 export default {
   user,

@@ -1,10 +1,11 @@
-import { RootState } from '../index';
-import { IExchangeState } from '../types';
+import { IRootState } from '../index';
+import { IExchangeState, IPrice } from '../types';
 
-const swap = (state: RootState): IExchangeState => state.swap;
-const inputToken = (state: RootState): string => swap(state).in;
-const outputToken = (state: RootState): string => swap(state).out;
-const swapValue = (state: RootState): string => swap(state).value;
-const fieldType = (state: RootState): string => swap(state).changedField;
+const swap = (state: IRootState): IExchangeState => state.swap;
+const inputToken = (state: IRootState): string => swap(state).in;
+const outputToken = (state: IRootState): string => swap(state).out;
+const swapValue = (state: IRootState): string => swap(state).value;
+const fieldType = (state: IRootState): string => swap(state).changedField;
+const price = (state: IRootState): IPrice => swap(state).price;
 
-export default { inputToken, outputToken, swapValue, fieldType };
+export default { inputToken, outputToken, swapValue, fieldType, price };

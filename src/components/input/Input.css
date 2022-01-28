@@ -13,6 +13,9 @@
   outline: none;
   border: none;
   text-align: right;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .input.left {

@@ -1,4 +1,5 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import { batch } from 'react-redux';
 import ChangeButton from '../../components/button/change/ChangeButton';
 import Button from '../../components/button/Button';
 import { EFieldType, IInputChangeArgs, ITokenInfo } from '../../types';
@@ -13,6 +14,7 @@ import { IListItem } from '../../components/list/item/ListItem';
 import { clear, setFieldType, setInputToken, setOutputToken } from '../../store/swap';
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 import swapSelector from '../../store/swap/selectors';
+import swapActions from '../../store/swap/actions';
 
 interface IProps {
   inputTokenInfo?: ITokenInfo;
@@ -28,15 +30,21 @@ const Exchange: React.FC<IProps> = ({ buttonLabel, inputTokenInfo, outputTokenIn
   const [modalIsVisible, toggleModalVisibility] = useModal();
 
   const fieldType = useAppSelector(swapSelector.fieldType);
+  const swapPrice = useAppSelector(swapSelector.price);
 
-  const [inputValue, setInputValue] = useState('0');
-  const [outputValue, setOutputValue] = useState('0');
+  const [inputValue, setInputValue] = useState('');
+  const [outputValue, setOutputValue] = useState('');
+  const [clickedButton, setClickedButton] = useState<EFieldType>(EFieldType.IN);
 
   const handleInputValueChange = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>, args?: IInputChangeArgs) => {
       const value = args?.value ?? '';
       setInputValue(value);
-      dispatch(setFieldType(EFieldType.IN));
+      batch(() => {
+        dispatch(swapActions.setValue(value));
+        dispatch(setFieldType(EFieldType.IN));
+        dispatch(swapActions.loadPairPrice());
+      });
     },
     [dispatch],
   );
@@ -45,7 +53,11 @@ const Exchange: React.FC<IProps> = ({ buttonLabel, inputTokenInfo, outputTokenIn
     (event: React.ChangeEvent<HTMLInputElement>, args?: IInputChangeArgs) => {
       const value = args?.value ?? '';
       setOutputValue(value);
-      dispatch(setFieldType(EFieldType.OUT));
+      batch(() => {
+        dispatch(swapActions.setValue(value));
+        dispatch(setFieldType(EFieldType.OUT));
+        dispatch(swapActions.loadPairPrice());
+      });
     },
     [dispatch],
   );
@@ -58,22 +70,25 @@ const Exchange: React.FC<IProps> = ({ buttonLabel, inputTokenInfo, outputTokenIn
       }
 
       const address = item.data?.address ?? '';
-      if (fieldType === EFieldType.IN) {
-        dispatch(setInputToken(address));
-      } else {
-        dispatch(setOutputToken(address));
-      }
+      batch(() => {
+        if (clickedButton === EFieldType.IN) {
+          dispatch(setInputToken(address));
+        } else {
+          dispatch(setOutputToken(address));
+        }
+        dispatch(swapActions.loadPairPrice());
+      });
       toggleModalVisibility();
     },
-    [fieldType, toggleModalVisibility, dispatch],
+    [toggleModalVisibility, clickedButton, dispatch],
   );
 
   const handleSelectTokenButtonClick = useCallback(
     (swapType: EFieldType) => {
-      dispatch(setFieldType(swapType));
+      setClickedButton(swapType);
       toggleModalVisibility();
     },
-    [dispatch, toggleModalVisibility],
+    [toggleModalVisibility],
   );
 
   const disabledItems = useMemo(
@@ -86,6 +101,20 @@ const Exchange: React.FC<IProps> = ({ buttonLabel, inputTokenInfo, outputTokenIn
     [disabledItems, handleSelectToken],
   );
 
+  const inOutValues = useMemo(() => {
+    const price = Number(swapPrice.price) ? swapPrice.price : '';
+    if (fieldType === EFieldType.OUT) {
+      return {
+        in: price,
+        out: outputValue,
+      };
+    }
+    return {
+      in: inputValue,
+      out: price,
+    };
+  }, [fieldType, inputValue, outputValue, swapPrice.price]);
+  console.log('inOutValues', inOutValues);
   useEffect(
     () => () => {
       dispatch(clear());
@@ -98,7 +127,7 @@ const Exchange: React.FC<IProps> = ({ buttonLabel, inputTokenInfo, outputTokenIn
       <div className={`${cssPrefix}-container`}>
         <div>
           <TokenInput
-            value={inputValue}
+            value={inOutValues.in}
             type={'number'}
             onChange={handleInputValueChange}
             leftComponent={
@@ -112,7 +141,7 @@ const Exchange: React.FC<IProps> = ({ buttonLabel, inputTokenInfo, outputTokenIn
           />
           <ChangeButton />
           <TokenInput
-            value={outputValue}
+            value={inOutValues.out}
             type={'number'}
             onChange={handleOutputValueChange}
             leftComponent={
