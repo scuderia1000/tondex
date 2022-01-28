@@ -114,7 +114,7 @@ const Exchange: React.FC<IProps> = ({ buttonLabel, inputTokenInfo, outputTokenIn
       out: price,
     };
   }, [fieldType, inputValue, outputValue, swapPrice.price]);
-  console.log('inOutValues', inOutValues);
+
   useEffect(
     () => () => {
       dispatch(clear());
@@ -127,8 +127,9 @@ const Exchange: React.FC<IProps> = ({ buttonLabel, inputTokenInfo, outputTokenIn
       <div className={`${cssPrefix}-container`}>
         <div>
           <TokenInput
-            value={inOutValues.in}
             type={'number'}
+            value={inOutValues.in}
+            price={swapPrice.inCostUSD}
             onChange={handleInputValueChange}
             leftComponent={
               <CoinButton
@@ -141,8 +142,9 @@ const Exchange: React.FC<IProps> = ({ buttonLabel, inputTokenInfo, outputTokenIn
           />
           <ChangeButton />
           <TokenInput
-            value={inOutValues.out}
             type={'number'}
+            value={inOutValues.out}
+            price={swapPrice.outCostUSD}
             onChange={handleOutputValueChange}
             leftComponent={
               <CoinButton

@@ -10,22 +10,19 @@ interface IPops extends IInputProps {
 const cssPrefix = 'token-input';
 const cssPrefixContainer = `${cssPrefix}-container`;
 
-const TokenInput: React.FC<IPops> = ({ value, onChange, leftComponent, price }) => {
-  console.log('TokenInput');
-  return (
-    <div className={`${cssPrefix}`}>
-      <div className={cssPrefixContainer}>
-        {leftComponent}
-        <Input
-          className={`${cssPrefixContainer}--input`}
-          type={'number'}
-          value={value}
-          onChange={onChange}
-        />
-      </div>
-      <span className={`${cssPrefix}--info`}>{price}</span>
+const TokenInput: React.FC<IPops> = ({ value, onChange, leftComponent, price }) => (
+  <div className={`${cssPrefix}`}>
+    <div className={cssPrefixContainer}>
+      {leftComponent}
+      <Input
+        className={`${cssPrefixContainer}--input`}
+        type={'number'}
+        value={value}
+        onChange={onChange}
+      />
     </div>
-  );
-};
+    <span className={`${cssPrefix}--info`}>{Number(price) ? `$${price}` : ''}</span>
+  </div>
+);
 
 export default TokenInput;

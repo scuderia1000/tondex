@@ -13,3 +13,4 @@ export const getBinanceTickerPriceUrl = (firstTokenSymbol: string, secondTokenSy
   `https://api.coinstats.app/public/v1/tickers?exchange=binance&pair=${firstTokenSymbol}-${secondTokenSymbol}`;
 
 export const DIGITS_COUNT = 9;
+export const TAX = 0.01;

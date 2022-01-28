@@ -18,6 +18,8 @@ export interface IPrice {
   pair: string;
   amount: string;
   price: string;
+  inCostUSD: string;
+  outCostUSD: string;
 }
 
 export interface IExchangeState extends ITokenPairs {

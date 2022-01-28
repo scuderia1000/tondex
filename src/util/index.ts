@@ -1,7 +1,7 @@
 import { ITokenPricePairs } from '../types';
 import { IPrice } from '../store/types';
 import { price } from '../mock/price';
-import { DIGITS_COUNT } from '../const';
+import { DIGITS_COUNT, TAX } from '../const';
 
 export const unique = <T>(array: T[], key: keyof T): T[] => {
   const seen = new Set();
@@ -32,9 +32,20 @@ export const getPairPrices = (pair: ITokenPricePairs): IPrice => {
   const leftDigitsCount = String(calculatedPrice).split('.')?.[0].length;
   const fixedNumber = DIGITS_COUNT - leftDigitsCount;
 
+  const inTaxUSD = Number(inPriceUSD) * amount * TAX;
+  const inCostUSD = Number(inPriceUSD) * amount + inTaxUSD;
+  const inCostUSDLeftDigitsCount = String(inCostUSD).split('.')?.[0].length;
+  const inCostUSDFixedNumber = DIGITS_COUNT - inCostUSDLeftDigitsCount;
+
+  const outCostUSD = Number(calculatedPrice) * Number(outPriceUSD);
+  const outCostUSDLeftDigitsCount = String(outCostUSD).split('.')?.[0].length;
+  const outCostUSDFixedNumber = DIGITS_COUNT - outCostUSDLeftDigitsCount;
+
   return {
     pair: `${pair.inSymbol} --> ${pair.outSymbol}`,
     amount: String(amount),
     price: calculatedPrice.toFixed(fixedNumber),
+    inCostUSD: inCostUSD.toFixed(inCostUSDFixedNumber),
+    outCostUSD: outCostUSD.toFixed(outCostUSDFixedNumber),
   };
 };

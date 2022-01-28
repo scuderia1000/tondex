@@ -13,6 +13,8 @@ const initialState: IExchangeState = {
     pair: '',
     amount: '1',
     price: '',
+    inCostUSD: '',
+    outCostUSD: '',
   },
 };
 
