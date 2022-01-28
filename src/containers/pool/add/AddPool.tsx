@@ -28,7 +28,7 @@ const AddPool: React.FC = () => {
   return (
     <div className={cssPrefix}>
       <Exchange
-        buttonLabel={AddLiquidity}
+        confirmLabel={AddLiquidity}
         inputTokenInfo={inTokenInfo}
         outputTokenInfo={outTokenInfo}
         onConfirmClick={handleAddPool}

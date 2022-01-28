@@ -1,5 +1,6 @@
 import React, { useMemo } from 'react';
 import './CoinButton.css';
+import classNames from 'classnames';
 import { SelectToken } from '../../../const';
 import ImageFallback from '../../image/ImageFallback';
 import { EFieldType } from '../../../types';
@@ -9,6 +10,7 @@ interface IProps {
   logoURI?: string;
   onClick?(swapType: EFieldType): void;
   tokenSwapType?: EFieldType;
+  disabled?: boolean;
 }
 
 const cssPrefix = 'coin-button';
@@ -18,7 +20,13 @@ const CoinButton: React.FC<IProps> = ({
   logoURI,
   onClick,
   tokenSwapType = EFieldType.IN,
+  disabled = false,
 }) => {
+  const classes = classNames({
+    [cssPrefix]: true,
+    [`${cssPrefix} disabled`]: disabled,
+  });
+
   const tokenLabel = useMemo(() => {
     if (!symbol) {
       return SelectToken;
@@ -35,10 +43,14 @@ const CoinButton: React.FC<IProps> = ({
     return <ImageFallback src={logoURI} alt={`${symbol}-logo`} />;
   }, [logoURI, symbol]);
 
-  const handleButtonClick = () => onClick?.(tokenSwapType);
+  const handleButtonClick = () => {
+    if (!disabled && onClick) {
+      onClick(tokenSwapType);
+    }
+  };
 
   return (
-    <button className={cssPrefix} onClick={handleButtonClick}>
+    <button className={classes} onClick={handleButtonClick}>
       {tokenImage}
       <span className={`${cssPrefix}--label`}>{tokenLabel}</span>
     </button>

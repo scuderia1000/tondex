@@ -17,7 +17,7 @@ const Swap: React.FC = () => {
 
   return (
     <div className={cssPrefix}>
-      <Exchange buttonLabel={SWAP} inputTokenInfo={inTokenInfo} outputTokenInfo={outTokenInfo} />
+      <Exchange confirmLabel={SWAP} inputTokenInfo={inTokenInfo} outputTokenInfo={outTokenInfo} />
     </div>
   );
 };

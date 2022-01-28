@@ -19,17 +19,19 @@ import swapActions from '../../store/swap/actions';
 interface IProps {
   inputTokenInfo?: ITokenInfo;
   outputTokenInfo?: ITokenInfo;
-  buttonLabel?: string;
+  confirmLabel?: string;
   onConfirmClick?: () => void;
+  isCoinButtonsDisabled?: boolean;
 }
 
 const cssPrefix = 'exchange';
 
 const Exchange: React.FC<IProps> = ({
-  buttonLabel,
+  confirmLabel,
   inputTokenInfo,
   outputTokenInfo,
   onConfirmClick,
+  isCoinButtonsDisabled,
 }) => {
   const dispatch = useAppDispatch();
 
@@ -147,6 +149,7 @@ const Exchange: React.FC<IProps> = ({
             onChange={handleInputValueChange}
             leftComponent={
               <CoinButton
+                disabled={isCoinButtonsDisabled}
                 symbol={inputTokenInfo?.symbol}
                 logoURI={inputTokenInfo?.logoURI}
                 tokenSwapType={EFieldType.IN}
@@ -162,6 +165,7 @@ const Exchange: React.FC<IProps> = ({
             onChange={handleOutputValueChange}
             leftComponent={
               <CoinButton
+                disabled={isCoinButtonsDisabled}
                 symbol={outputTokenInfo?.symbol}
                 logoURI={outputTokenInfo?.logoURI}
                 tokenSwapType={EFieldType.OUT}
@@ -170,7 +174,7 @@ const Exchange: React.FC<IProps> = ({
             }
           />
         </div>
-        <Button label={buttonLabel} onClick={onConfirmClick} disabled={isConfirmButtonDisabled} />
+        <Button label={confirmLabel} onClick={onConfirmClick} disabled={isConfirmButtonDisabled} />
       </div>
       <Modal
         isVisible={modalIsVisible}

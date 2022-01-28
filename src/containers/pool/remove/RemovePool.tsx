@@ -4,7 +4,6 @@ import './RemovePool.css';
 import { RemoveLiquidity } from '../../../const';
 import Exchange from '../../exchange/Exchange';
 import { useAppDispatch, useAppSelector } from '../../../hooks/hooks';
-// import swapSelector from '../../../store/swap/selectors';
 import tokensSelector from '../../../store/tokens/selectors';
 import userSelector from '../../../store/user/selectors';
 import swapActions from '../../../store/swap/actions';
@@ -15,9 +14,6 @@ const RemovePool: React.FC = () => {
   const dispatch = useAppDispatch();
   const params = useParams();
   const pool = useAppSelector((state) => userSelector.poolById(state, params?.poolAddress ?? ''));
-
-  // const inputToken = useAppSelector(swapSelector.inputToken);
-  // const outputToken = useAppSelector(swapSelector.outputToken);
 
   const inTokenInfo = useAppSelector((state) =>
     tokensSelector.tokenByAddress(state, pool.firstToken.address),
@@ -37,10 +33,11 @@ const RemovePool: React.FC = () => {
   return (
     <div className={cssPrefix}>
       <Exchange
-        buttonLabel={RemoveLiquidity}
+        confirmLabel={RemoveLiquidity}
         inputTokenInfo={inTokenInfo}
         outputTokenInfo={outTokenInfo}
         onConfirmClick={handleRemovePool}
+        isCoinButtonsDisabled={true}
       />
     </div>
   );

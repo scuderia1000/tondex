@@ -79,6 +79,8 @@ body,
 
 .disabled {
   color: var(--color-disabled);
+  cursor: auto;
+  opacity: 0.5;
 }
 
 input[type='number'] {

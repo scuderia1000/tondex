@@ -3,13 +3,9 @@
   flex-wrap: nowrap;
   align-items: center;
   justify-content: space-between;
-  /*display: grid;*/
-  /*grid-template-columns: 1fr 1fr;*/
-  /*column-gap: 1rem;*/
   height: 2.4rem;
   width: initial;
   padding: 0 8px;
-  /*color: rgb(0, 0, 0);*/
   cursor: pointer;
   border-radius: 16px;
   outline: none;
@@ -21,7 +17,7 @@
   box-shadow: rgba(0, 0, 0, 0.08) 0 6px 10px;
 }
 
-.coin-button:hover {
+.coin-button:hover:not(.disabled) {
   background-color: var(--hover-bg-color);
 }
 
