@@ -4,12 +4,13 @@ import './TokenInput.css';
 
 interface IPops extends IInputProps {
   leftComponent?: React.ReactNode;
+  price?: string;
 }
 
 const cssPrefix = 'token-input';
 const cssPrefixContainer = `${cssPrefix}-container`;
 
-const TokenInput: React.FC<IPops> = ({ value, onChange, leftComponent }) => {
+const TokenInput: React.FC<IPops> = ({ value, onChange, leftComponent, price }) => {
   console.log('TokenInput');
   return (
     <div className={`${cssPrefix}`}>
@@ -22,7 +23,7 @@ const TokenInput: React.FC<IPops> = ({ value, onChange, leftComponent }) => {
           onChange={onChange}
         />
       </div>
-      {/* <span className={`${cssPrefix}--info`}>Info</span> */}
+      <span className={`${cssPrefix}--info`}>{price}</span>
     </div>
   );
 };

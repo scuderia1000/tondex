@@ -1,14 +1,28 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { IExchangeState } from '../types';
-import { EFieldType } from '../../types';
+import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { IExchangeState, IPrice } from '../types';
+import { EFieldType, ITokenPricePairs } from '../../types';
 import { TONCOIN_ADDRESS } from '../../const';
+import { fetchTokensPrice } from '../../api';
 
 const initialState: IExchangeState = {
   in: TONCOIN_ADDRESS,
   out: '',
   changedField: EFieldType.IN,
   value: '0',
+  price: {
+    pair: '',
+    amount: '1',
+    price: '',
+  },
 };
+
+export const fetchTokensPriceAsync = createAsyncThunk(
+  'tokens/fetchPrice',
+  async (pair: ITokenPricePairs) => {
+    const response = await fetchTokensPrice(pair);
+    return response.data;
+  },
+);
 
 export const slice = createSlice({
   name: 'swap',
@@ -26,12 +40,24 @@ export const slice = createSlice({
     setValue(state: IExchangeState, { payload }: PayloadAction<string>) {
       state.value = payload;
     },
+    setPrice(state: IExchangeState, { payload }: PayloadAction<IPrice>) {
+      state.price = payload;
+    },
     clear() {
       return initialState;
     },
   },
+  extraReducers: (builder) => {
+    builder.addCase(
+      fetchTokensPriceAsync.fulfilled,
+      (state, { payload }: PayloadAction<IPrice>) => {
+        state.price = payload;
+      },
+    );
+  },
 });
 
-export const { setInputToken, setOutputToken, setFieldType, setValue, clear } = slice.actions;
+export const { setInputToken, setOutputToken, setFieldType, setValue, clear, setPrice } =
+  slice.actions;
 
 export default slice.reducer;

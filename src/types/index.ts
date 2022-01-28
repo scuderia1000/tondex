@@ -41,3 +41,11 @@ export enum EFieldType {
   IN = 'in',
   OUT = 'out',
 }
+
+export interface ITokenPricePairs {
+  inAddress: string;
+  inSymbol: string;
+  outAddress?: string;
+  outSymbol?: string;
+  amount?: string;
+}

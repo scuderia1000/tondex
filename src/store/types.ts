@@ -13,14 +13,21 @@ export interface ITokenPairs {
   out: string;
 }
 
+export interface IPrice {
+  pair: string;
+  amount: string;
+  price: string;
+}
+
 export interface IExchangeState extends ITokenPairs {
   changedField: EFieldType;
   value: string;
+  price: IPrice;
 }
 
 export interface IPoolToken {
   address?: string;
-  buyPrice?: number;
+  price?: number;
   tokensAmount?: number;
   timestamp?: number;
 }
