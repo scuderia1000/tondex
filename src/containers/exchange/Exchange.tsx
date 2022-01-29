@@ -45,6 +45,8 @@ const Exchange: React.FC<IProps> = ({
   const swapValue = useAppSelector(swapSelector.swapValue);
   const swapPrice = useAppSelector(swapSelector.price);
 
+  const [isInInputValid, setIsInInputValid] = useState(true);
+  const [isOutInputValid, setIsOutInputValid] = useState(true);
   const [clickedButton, setClickedButton] = useState<EFieldType>(EFieldType.IN);
 
   const inputChange = useCallback(
@@ -127,8 +129,8 @@ const Exchange: React.FC<IProps> = ({
   }, [fieldType, swapPrice.price, swapValue]);
 
   const isConfirmButtonDisabled = useMemo(
-    () => !(Number(inOutValues.in) && Number(inOutValues.out)),
-    [inOutValues.in, inOutValues.out],
+    () => !(Number(inOutValues.in) && Number(inOutValues.out) && isInInputValid && isOutInputValid),
+    [inOutValues.in, inOutValues.out, isInInputValid, isOutInputValid],
   );
 
   useEffect(
@@ -152,6 +154,8 @@ const Exchange: React.FC<IProps> = ({
             price={swapPrice.inCostUSD}
             onChange={handleInputValueChange}
             max={inMaxValue}
+            onValidationChange={setIsInInputValid}
+            invalid={!isInInputValid}
             leftComponent={
               <CoinButton
                 disabled={isCoinButtonsDisabled}
@@ -169,6 +173,8 @@ const Exchange: React.FC<IProps> = ({
             price={swapPrice.outCostUSD}
             onChange={handleOutputValueChange}
             max={outMaxValue}
+            onValidationChange={setIsOutInputValid}
+            invalid={!isOutInputValid}
             leftComponent={
               <CoinButton
                 disabled={isCoinButtonsDisabled}

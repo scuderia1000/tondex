@@ -49,3 +49,8 @@ export interface ITokenPricePairs {
   outSymbol: string;
   amount: string;
 }
+
+export type IValidationControl = {
+  onValidationChange?: (isValid: boolean) => void;
+  validate?: (value: string) => boolean;
+};

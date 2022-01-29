@@ -4,6 +4,10 @@
   justify-content: center;
 }
 
+.input-container.invalid > .input {
+  color: var(--color-error);
+}
+
 .input {
   width: 100%;
   min-width: 120px;

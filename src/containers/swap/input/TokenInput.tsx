@@ -11,21 +11,19 @@ interface IPops extends IInputProps {
 const cssPrefix = 'token-input';
 const cssPrefixContainer = `${cssPrefix}-container`;
 
-const TokenInput: React.FC<IPops> = ({ value, onChange, leftComponent, price, max }) => (
+const TokenInput: React.FC<IPops> = (props) => (
   <div className={`${cssPrefix}`}>
     <div className={cssPrefixContainer}>
-      {leftComponent}
+      {props.leftComponent}
       <Input
-        className={`${cssPrefixContainer}--input`}
+        {...props}
+        className={`${cssPrefixContainer}--input ${props.className}`}
         type={'number'}
-        value={value}
-        onChange={onChange}
-        max={max}
       />
     </div>
     <div className={`${cssPrefix}--info-container`}>
-      <span className={`${cssPrefix}--info`}>{Number(price) ? `$${price}` : ''}</span>
-      <span className={`${cssPrefix}--info`}>{max ? `${Max}: ${max}` : ''}</span>
+      <span className={`${cssPrefix}--info`}>{Number(props.price) ? `$${props.price}` : ''}</span>
+      <span className={`${cssPrefix}--info`}>{props.max ? `${Max}: ${props.max}` : ''}</span>
     </div>
   </div>
 );

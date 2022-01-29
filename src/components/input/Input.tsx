@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './Input.css';
-import { IInputChangeArgs, IInputEventHandler } from '../../types';
+import classNames from 'classnames';
+import { IInputChangeArgs, IInputEventHandler, IValidationControl } from '../../types';
 
-export interface IInputProps {
+export interface IInputProps extends IValidationControl {
   /** Input type */
   type?: 'text' | 'number';
   /** Additional classname */
@@ -14,6 +15,7 @@ export interface IInputProps {
   onChange?: IInputEventHandler<IInputChangeArgs>;
   textAlign?: 'left' | 'right';
   max?: string;
+  invalid?: boolean;
 }
 
 const cssPrefix = 'input';
@@ -27,21 +29,56 @@ const Input: React.FC<IInputProps> = ({
   textAlign = 'right',
   placeholder = '0.0',
   max,
+  invalid = false,
+  onValidationChange,
+  validate,
 }) => {
-  // TODO
-  const validate = (value: string): boolean => !max || Number(value) <= Number(max);
+  const [isValid, setIsValid] = useState(!invalid);
+  const maxValidation = (value: string): boolean => !max || value <= max;
+
+  const validateInput = (value: string): void => {
+    const outerValid = !validate || validate(value);
+    const defaultValid = maxValidation(value);
+    const isValueValid = outerValid && defaultValid;
+    if (isValid !== isValueValid) {
+      setIsValid(isValueValid);
+    }
+  };
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
-    if (onChange && validate(value)) {
+    if (onChange) {
       onChange(event, { value });
     }
   };
 
+  useEffect(() => {
+    setIsValid(!invalid);
+  }, [invalid]);
+
+  useEffect(() => {
+    onValidationChange?.(isValid);
+  }, [isValid]);
+
+  useEffect(() => {
+    !!value && validateInput(value);
+  }, [value]);
+
+  const classes = classNames({
+    [cssPrefixContainer]: true,
+    [className]: className,
+    invalid: !isValid,
+  });
+
+  const inputCls = classNames({
+    [cssPrefix]: true,
+    [textAlign]: !!textAlign,
+  });
+
   return (
-    <div className={`${cssPrefixContainer} ${className}`}>
+    <div className={classes}>
       <input
-        className={`${cssPrefix} ${textAlign}`}
+        className={inputCls}
         type={type}
         placeholder={placeholder}
         value={value}

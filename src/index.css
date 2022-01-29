@@ -9,6 +9,7 @@
   --color-main: #303757;
   --color-black: #333;
   --color-white: white;
+  --color-error: red;
   --color-disabled: rgb(86, 90, 105);
   --color-grey: rgb(110, 114, 125);;
   /** Fonts */
