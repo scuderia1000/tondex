@@ -17,7 +17,7 @@ export interface ITokenPairs {
 export interface IPrice {
   pair: string;
   amount: string;
-  price: string;
+  quote: string;
   inCostUSD: string;
   outCostUSD: string;
 }

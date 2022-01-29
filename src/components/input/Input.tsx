@@ -34,7 +34,7 @@ const Input: React.FC<IInputProps> = ({
   validate,
 }) => {
   const [isValid, setIsValid] = useState(!invalid);
-  const maxValidation = (value: string): boolean => !max || value <= max;
+  const maxValidation = (value: string): boolean => !max || Number(value) <= Number(max);
 
   const validateInput = (value: string): void => {
     const outerValid = !validate || validate(value);

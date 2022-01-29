@@ -8,11 +8,11 @@ const initialState: IExchangeState = {
   in: TONCOIN_ADDRESS,
   out: '',
   changedField: EFieldType.IN,
-  value: '0',
+  value: '',
   price: {
     pair: '',
     amount: '1',
-    price: '',
+    quote: '',
     inCostUSD: '',
     outCostUSD: '',
   },

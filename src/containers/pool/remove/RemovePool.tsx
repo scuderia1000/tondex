@@ -1,11 +1,12 @@
 import React, { useCallback, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import './RemovePool.css';
 import { RemoveLiquidity } from '../../../const';
 import Exchange from '../../exchange/Exchange';
 import { useAppDispatch, useAppSelector } from '../../../hooks/hooks';
 import tokensSelector from '../../../store/tokens/selectors';
 import userSelector from '../../../store/user/selectors';
+import userActions from '../../../store/user/actions';
 import swapActions from '../../../store/swap/actions';
 
 const cssPrefix = 'remove-pool';
@@ -13,18 +14,22 @@ const cssPrefix = 'remove-pool';
 const RemovePool: React.FC = () => {
   const dispatch = useAppDispatch();
   const params = useParams();
-  const pool = useAppSelector((state) => userSelector.poolById(state, params?.poolAddress ?? ''));
+  const navigate = useNavigate();
 
+  const poolAddress = params?.poolAddress ?? '';
+
+  const pool = useAppSelector((state) => userSelector.poolById(state, poolAddress));
   const inTokenInfo = useAppSelector((state) =>
-    tokensSelector.tokenByAddress(state, pool.firstToken.address),
+    tokensSelector.tokenByAddress(state, pool?.firstToken?.address),
   );
   const outTokenInfo = useAppSelector((state) =>
-    tokensSelector.tokenByAddress(state, pool.secondToken.address),
+    tokensSelector.tokenByAddress(state, pool?.secondToken?.address),
   );
 
   const handleRemovePool = useCallback(() => {
-    console.log('remove');
-  }, []);
+    dispatch(userActions.removePoolLiquidity(poolAddress));
+    navigate(-1);
+  }, [dispatch, navigate, poolAddress]);
 
   useEffect(() => {
     dispatch(swapActions.updatePairPriceByPool(params?.poolAddress ?? ''));
@@ -38,8 +43,8 @@ const RemovePool: React.FC = () => {
         outputTokenInfo={outTokenInfo}
         onConfirmClick={handleRemovePool}
         isCoinButtonsDisabled={true}
-        inMaxValue={pool.firstToken.tokensAmount}
-        outMaxValue={pool.secondToken.tokensAmount}
+        inMaxValue={pool?.firstToken?.tokensAmount}
+        outMaxValue={pool?.secondToken?.tokensAmount}
       />
     </div>
   );

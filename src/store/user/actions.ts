@@ -1,7 +1,8 @@
 import swapSelector from '../swap/selectors';
 import { IGetState, IPool, IUserPool } from '../types';
 import userSelector from './selectors';
-import { setPool, setPoolsById } from './index';
+import { removePoolById, setPool, setPoolsById } from './index';
+import { toFixed } from '../../util';
 
 const createPool = () => (dispatch: Function, getState: IGetState) => {
   const state = getState();
@@ -22,7 +23,7 @@ const createPool = () => (dispatch: Function, getState: IGetState) => {
     secondToken: {
       address: outTokenAddress,
       price: swapPrice.outCostUSD,
-      tokensAmount: swapPrice.price,
+      tokensAmount: swapPrice.quote,
       timestamp: new Date().getTime(),
     },
   };
@@ -44,7 +45,7 @@ const createPool = () => (dispatch: Function, getState: IGetState) => {
         ...pool,
         firstToken: {
           ...pool.firstToken,
-          tokensAmount: String(
+          tokensAmount: toFixed(
             Number(pool.firstToken.tokensAmount) +
               Number(pools[poolAddress].firstToken.tokensAmount),
           ),
@@ -52,7 +53,7 @@ const createPool = () => (dispatch: Function, getState: IGetState) => {
         },
         secondToken: {
           ...pool.secondToken,
-          tokensAmount: String(
+          tokensAmount: toFixed(
             Number(pool.secondToken.tokensAmount) +
               Number(pools[poolAddress].secondToken.tokensAmount),
           ),
@@ -66,6 +67,41 @@ const createPool = () => (dispatch: Function, getState: IGetState) => {
   }
 };
 
+const removePoolLiquidity = (poolAddress: string) => (dispatch: Function, getState: IGetState) => {
+  const state = getState();
+  const inTokenAddress = swapSelector.inputToken(state);
+  const outTokenAddress = swapSelector.outputToken(state);
+  const swapPrice = swapSelector.price(state);
+  const pool = userSelector.poolById(state, poolAddress);
+  const { amount } = swapPrice;
+  if (!inTokenAddress || !outTokenAddress || !amount) return;
+
+  const firstAmount = toFixed(Number(pool.firstToken.tokensAmount) - Number(swapPrice.amount));
+  const secondAmount = toFixed(Number(pool.secondToken.tokensAmount) - Number(swapPrice.quote));
+  if (Number(firstAmount) === 0 || Number(secondAmount) === 0) {
+    dispatch(removePoolById(poolAddress));
+    return;
+  }
+
+  const updatedPool: IUserPool = {
+    [poolAddress]: {
+      ...pool,
+      firstToken: {
+        ...pool.firstToken,
+        tokensAmount: toFixed(Number(pool.firstToken.tokensAmount) - Number(swapPrice.amount)),
+        timestamp: new Date().getTime(),
+      },
+      secondToken: {
+        ...pool.secondToken,
+        tokensAmount: toFixed(Number(pool.secondToken.tokensAmount) - Number(swapPrice.quote)),
+        timestamp: new Date().getTime(),
+      },
+    },
+  };
+  dispatch(setPoolsById(updatedPool));
+};
+
 export default {
   createPool,
+  removePoolLiquidity,
 };

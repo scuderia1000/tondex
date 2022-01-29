@@ -61,7 +61,7 @@ const updatePairPriceByPool =
     const price: IPrice = {
       pair: pairTemplate(inToken.symbol, outToken.symbol),
       amount: inAmount,
-      price: outAmount,
+      quote: outAmount,
       inCostUSD: toFixed(Number(inToken.price) * Number(inAmount)),
       outCostUSD: toFixed(Number(outToken.price) * Number(outAmount)),
     };

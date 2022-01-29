@@ -43,7 +43,7 @@ export const getPairPrices = (pair: ITokenPricePairs): IPrice => {
   return {
     pair: pairTemplate(pair.inSymbol, pair.outSymbol),
     amount: String(amount),
-    price: toFixed(calculatedPrice),
+    quote: toFixed(calculatedPrice),
     inCostUSD: toFixed(inCostUSD),
     outCostUSD: toFixed(outCostUSD),
   };

@@ -33,9 +33,12 @@ export const slice = createSlice({
         state.pools[key] = payload[key];
       });
     },
+    removePoolById(state: IUserState, { payload }: PayloadAction<string>) {
+      delete state.pools[payload];
+    },
   },
 });
 
-export const { setPool, setPoolsById } = slice.actions;
+export const { setPool, setPoolsById, removePoolById } = slice.actions;
 
 export default slice.reducer;

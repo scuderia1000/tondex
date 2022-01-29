@@ -114,19 +114,18 @@ const Exchange: React.FC<IProps> = ({
   );
 
   const inOutValues = useMemo(() => {
-    const quote = Number(swapPrice.price) ? swapPrice.price : '';
-    const swapAmount = Number(swapValue) ? swapValue : '';
+    const quote = Number(swapPrice.quote) ? swapPrice.quote : '';
     if (fieldType === EFieldType.OUT) {
       return {
         in: quote,
-        out: swapAmount,
+        out: swapValue,
       };
     }
     return {
-      in: swapAmount,
+      in: swapValue,
       out: quote,
     };
-  }, [fieldType, swapPrice.price, swapValue]);
+  }, [fieldType, swapPrice.quote, swapValue]);
 
   const isConfirmButtonDisabled = useMemo(
     () => !(Number(inOutValues.in) && Number(inOutValues.out) && isInInputValid && isOutInputValid),
