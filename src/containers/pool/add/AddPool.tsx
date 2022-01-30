@@ -6,7 +6,8 @@ import tokensSelector from '../../../store/tokens/selectors';
 import { useAppDispatch, useAppSelector } from '../../../hooks/hooks';
 import swapSelector from '../../../store/swap/selectors';
 import userPoolActions from '../../../store/user/actions';
-import './AddPool.css';
+import PoolHeader from '../header/PoolHeader';
+import { ReactComponent as Arrow } from '../../../components/assets/svg/arrow_back.svg';
 
 const cssPrefix = 'add-pool';
 
@@ -27,6 +28,7 @@ const AddPool: React.FC = () => {
 
   return (
     <div className={cssPrefix}>
+      <PoolHeader linkTo={'../pool'} label={<Arrow />} />
       <Exchange
         confirmLabel={AddLiquidity}
         inputTokenInfo={inTokenInfo}

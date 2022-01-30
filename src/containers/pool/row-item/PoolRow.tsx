@@ -41,11 +41,11 @@ const PoolRow: React.FC<IProps> = ({
   );
   return (
     <div className={cssPrefix}>
-      <div className={`${cssPrefix}--icons`}>
+      <div className={`${cssPrefix}--name`}>
         <ImageFallback src={firstTokenInfo?.logoURI} alt={`${firstTokenInfo?.id}-logo`} />
         <ImageFallback src={secondTokenInfo?.logoURI} alt={`${secondTokenInfo?.id}-logo`} />
+        <div>{`${firstTokenInfo?.symbol}/${secondTokenInfo?.symbol}`}</div>
       </div>
-      <div>{`${firstTokenInfo?.symbol}/${secondTokenInfo?.symbol}`}</div>
       <div className={`${cssPrefix}--amount`}>{`$${poolPriceUSD.toFixed(2)}`}</div>
       <div className={`${cssPrefix}--remove`} onClick={handleRemove}>
         <Remove className={`${cssPrefix}--icon`} />

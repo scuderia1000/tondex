@@ -29,3 +29,7 @@
   color: var(--color-white);
   background-color: var(--main-bg-color);
 }
+
+.link svg:hover {
+  fill: var(--color-grey);
+}

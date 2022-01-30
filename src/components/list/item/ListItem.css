@@ -23,3 +23,8 @@
 .list-item--disabled:hover {
   cursor: auto;
 }
+
+.list-item-caption {
+  width: 100%;
+  overflow: hidden;
+}

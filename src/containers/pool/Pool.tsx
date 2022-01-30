@@ -6,8 +6,9 @@ import EmptyList from './empty/EmptyList';
 import { useAppSelector } from '../../hooks/hooks';
 import userSelector from '../../store/user/selectors';
 import tokensSelector from '../../store/tokens/selectors';
-import List from '../../components/list/List';
 import PoolRow from './row-item/PoolRow';
+import PoolList from './list/PoolList';
+import { Add } from '../../const';
 
 export const cssPrefix = 'pool';
 export const cssPrefixPools = `${cssPrefix}-list`;
@@ -50,9 +51,9 @@ const Pool: React.FC = () => {
 
   return (
     <div className={cssPrefix}>
-      <PoolHeader />
+      <PoolHeader linkTo={'add'} label={Add} />
       <main className={cssPrefixPools}>
-        {pools.length ? <List items={pools} /> : <EmptyList />}
+        {pools.length ? <PoolList items={pools} /> : <EmptyList />}
       </main>
     </div>
   );

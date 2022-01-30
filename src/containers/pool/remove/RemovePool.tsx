@@ -1,6 +1,5 @@
 import React, { useCallback, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import './RemovePool.css';
 import { RemoveLiquidity } from '../../../const';
 import Exchange from '../../exchange/Exchange';
 import { useAppDispatch, useAppSelector } from '../../../hooks/hooks';
@@ -8,6 +7,8 @@ import tokensSelector from '../../../store/tokens/selectors';
 import userSelector from '../../../store/user/selectors';
 import userActions from '../../../store/user/actions';
 import swapActions from '../../../store/swap/actions';
+import { ReactComponent as Arrow } from '../../../components/assets/svg/arrow_back.svg';
+import PoolHeader from '../header/PoolHeader';
 
 const cssPrefix = 'remove-pool';
 
@@ -37,6 +38,7 @@ const RemovePool: React.FC = () => {
 
   return (
     <div className={cssPrefix}>
+      <PoolHeader linkTo={'../../pool'} label={<Arrow />} />
       <Exchange
         confirmLabel={RemoveLiquidity}
         inputTokenInfo={inTokenInfo}

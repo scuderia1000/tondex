@@ -4,7 +4,7 @@ import ListItem, { IListItem } from './item/ListItem';
 import RenderVisible from './virtualize/RenderVisible';
 import { IMouseEventHandler, ITokenInfo } from '../../types';
 
-interface IProps {
+export interface IListProps {
   items: IListItem<ITokenInfo>[];
   onItemClick?: IMouseEventHandler<IListItem<ITokenInfo>>;
 }
@@ -13,7 +13,7 @@ const ITEM_HEIGHT = 50;
 
 const cssPrefix = 'list';
 
-const List: React.FC<IProps> = ({ items, onItemClick }) => (
+const List: React.FC<IListProps> = ({ items, onItemClick }) => (
   <div className={cssPrefix}>
     {items.map((item) => (
       <RenderVisible key={item.id} itemHeight={ITEM_HEIGHT}>
