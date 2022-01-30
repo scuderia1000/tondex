@@ -59,9 +59,6 @@ export const slice = createSlice({
         state.price = payload;
       },
     );
-    // .addCase(fetchTokensPriceAsync.pending, (state) => {
-    //   state.price = initialState.price;
-    // });
   },
 });
 

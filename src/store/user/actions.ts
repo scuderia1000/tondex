@@ -1,5 +1,5 @@
 import swapSelector from '../swap/selectors';
-import { IGetState, IPool, IUserPool } from '../types';
+import { IGetState, IUserPool, IPool } from '../types';
 import userSelector from './selectors';
 import { removePoolById, setPool, setPoolsById } from './index';
 import { toFixed } from '../../util';
@@ -13,7 +13,7 @@ const createPool = () => (dispatch: Function, getState: IGetState) => {
   const { amount } = swapPrice;
   if (!inTokenAddress || !outTokenAddress || !amount) return;
 
-  const pool: IPool = {
+  const pool: IUserPool = {
     firstToken: {
       address: inTokenAddress,
       price: swapPrice.inCostUSD,
@@ -40,7 +40,7 @@ const createPool = () => (dispatch: Function, getState: IGetState) => {
     return !!poolAddress;
   });
   if (isPoolExist) {
-    const updatedPool: IUserPool = {
+    const updatedPool: IPool<IUserPool> = {
       [poolAddress]: {
         ...pool,
         firstToken: {
@@ -83,7 +83,7 @@ const removePoolLiquidity = (poolAddress: string) => (dispatch: Function, getSta
     return;
   }
 
-  const updatedPool: IUserPool = {
+  const updatedPool: IPool<IUserPool> = {
     [poolAddress]: {
       ...pool,
       firstToken: {

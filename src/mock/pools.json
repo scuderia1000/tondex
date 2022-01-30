@@ -1,0 +1,134 @@
+{
+  "data": {
+    "pools": [
+      {
+        "__typename": "Pool",
+        "feeTier": "3000",
+        "id": "0x5f0d8fc6057a959e79f7f79f8dbf12f29f9a9f34",
+        "liquidity": "36300112445",
+        "sqrtPrice": "28435312412149897527199998946377",
+        "tick": "117666",
+        "token0": {
+          "__typename": "Token",
+          "decimals": "8",
+          "derivedETH": "14.5521952358710870989852512138193",
+          "id": "0x2260fac5e5542a773aa44fbcfedf7c193bc2c599",
+          "name": "Wrapped BTC",
+          "symbol": "WBTC"
+        },
+        "token0Price": "0.0000776324262265779536427663933738461",
+        "token1": {
+          "__typename": "Token",
+          "decimals": "9",
+          "derivedETH": "0.001123702544062280633560005928466755",
+          "id": "0x582d872a1b094fc48f5de31d3b73f2d9be47def1",
+          "name": "Wrapped TON Coin",
+          "symbol": "TONCOIN"
+        },
+        "token1Price": "12881.21534526565724788642840848528",
+        "totalValueLockedToken0": "5.93136878",
+        "totalValueLockedToken1": "155199.828341142",
+        "totalValueLockedUSD": "634433.6432619958896092463510060277",
+        "txCount": "1955",
+        "volumeUSD": "11868316.51714691307404018159565254",
+        "volumeUSDWeek": "31909.55115408264"
+      },
+      {
+        "__typename": "Pool",
+        "feeTier": "10000",
+        "id": "0x4b62fa30fea125e43780dc425c2be5acb4ba743b",
+        "liquidity": "346558360131585398",
+        "sqrtPrice": "83662349167354494721562931006655",
+        "tick": "139251",
+        "token0": {
+          "__typename": "Token",
+          "decimals": "9",
+          "derivedETH": "0.001123702544062280633560005928466755",
+          "id": "0x582d872a1b094fc48f5de31d3b73f2d9be47def1",
+          "name": "Wrapped TON Coin",
+          "symbol": "TONCOIN"
+        },
+        "token0Price": "896.8071403013868863643594559433555",
+        "token1": {
+          "__typename": "Token",
+          "decimals": "18",
+          "derivedETH": "1",
+          "id": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+          "name": "Wrapped Ether",
+          "symbol": "WETH"
+        },
+        "token1Price": "0.001115066947018211122572428647614645",
+        "totalValueLockedToken0": "158846.867908302",
+        "totalValueLockedToken1": "55.804148411433178658",
+        "totalValueLockedUSD": "567182.9620686480379253812089703484",
+        "txCount": "2924",
+        "volumeUSD": "19116269.65251219037324541565324019",
+        "volumeUSDWeek": "0"
+      },
+      {
+        "__typename": "Pool",
+        "feeTier": "10000",
+        "id": "0x2a48dbf6347ea5cdc906b4bb6a2ed27969241cde",
+        "liquidity": "12634010901",
+        "sqrtPrice": "3845831121694911129840649165",
+        "tick": "-60510",
+        "token0": {
+          "__typename": "Token",
+          "decimals": "9",
+          "derivedETH": "0.001123702544062280633560005928466755",
+          "id": "0x582d872a1b094fc48f5de31d3b73f2d9be47def1",
+          "name": "Wrapped TON Coin",
+          "symbol": "TONCOIN"
+        },
+        "token0Price": "0.4244032962926468387807508575245116",
+        "token1": {
+          "__typename": "Token",
+          "decimals": "6",
+          "derivedETH": "0.0004149845688259759985242499524722929",
+          "id": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+          "name": "USD Coin",
+          "symbol": "USDC"
+        },
+        "token1Price": "2.356249371141667736143733365139723",
+        "totalValueLockedToken0": "16749.041928323",
+        "totalValueLockedToken1": "6187.835921",
+        "totalValueLockedUSD": "60957.70678110108250327050784431002",
+        "txCount": "214",
+        "volumeUSD": "1146639.061899",
+        "volumeUSDWeek": "50"
+      },
+      {
+        "__typename": "Pool",
+        "feeTier": "3000",
+        "id": "0x7f76a06e8485bb5a12c0e2632dd5c365ecf3e6da",
+        "liquidity": "178581802653",
+        "sqrtPrice": "4199970277197430080697308604",
+        "tick": "-58749",
+        "token0": {
+          "__typename": "Token",
+          "decimals": "9",
+          "derivedETH": "0.001123702544062280633560005928466755",
+          "id": "0x582d872a1b094fc48f5de31d3b73f2d9be47def1",
+          "name": "Wrapped TON Coin",
+          "symbol": "TONCOIN"
+        },
+        "token0Price": "0.3558498061588426586528089897398066",
+        "token1": {
+          "__typename": "Token",
+          "decimals": "6",
+          "derivedETH": "0.0004149845688259759985242499524722929",
+          "id": "0xdac17f958d2ee523a2206206994597c13d831ec7",
+          "name": "Tether USD",
+          "symbol": "USDT"
+        },
+        "token1Price": "2.810174356407052344860228455480652",
+        "totalValueLockedToken0": "772.730631156",
+        "totalValueLockedToken1": "2332.511475",
+        "totalValueLockedUSD": "4655.316976513170753504141833125485",
+        "txCount": "193",
+        "volumeUSD": "530993.476469612560251858558965455",
+        "volumeUSDWeek": "4345.361463999958"
+      }
+    ]
+  }
+}

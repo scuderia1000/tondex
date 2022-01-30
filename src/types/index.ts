@@ -13,8 +13,13 @@ export interface ITokenInfo {
   chainId?: number;
 }
 
-export interface IUserPool {
-  symbol?: string;
+export interface IPoolTokenInfo {
+  __typename: string;
+  decimals: string;
+  derivedETH: string;
+  id: string;
+  name: string;
+  symbol: string;
 }
 
 export interface IFetchResponse<T> {
@@ -53,4 +58,27 @@ export interface ITokenPricePairs {
 export type IValidationControl = {
   onValidationChange?: (isValid: boolean) => void;
   validate?: (value: string) => boolean;
+};
+
+export interface IPoolInfo {
+  address: string;
+  feeTier: string;
+  liquidity: string;
+  sqrtPrice: string;
+  token0: IPoolTokenInfo;
+  token1: IPoolTokenInfo;
+  token0Price: string;
+  token1Price: string;
+  // Volume 24h
+  volumeUSD: string;
+  // Volume 7D
+  volumeUSDWeek: string;
+  // TVL
+  totalValueLockedUSD: string;
+  totalValueLockedToken0: string;
+  totalValueLockedToken1: string;
+}
+
+export type IPoolsResponse = Omit<IPoolInfo, 'address'> & {
+  id: string;
 };

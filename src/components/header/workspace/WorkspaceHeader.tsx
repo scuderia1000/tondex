@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { POOL, SWAP } from '../../../const';
+import { POOL, STATS, SWAP } from '../../../const';
 import './WorkspaceHeader.css';
 
 const cssPrefixHeader = 'workspace-header';
@@ -19,6 +19,12 @@ const WorkspaceHeader: React.FC = () => (
       className={({ isActive }) => (isActive ? `${cssPrefixLink} active` : cssPrefixLink)}
     >
       {POOL}
+    </NavLink>
+    <NavLink
+      to={'stats'}
+      className={({ isActive }) => (isActive ? `${cssPrefixLink} active` : cssPrefixLink)}
+    >
+      {STATS}
     </NavLink>
   </nav>
 );

@@ -1,4 +1,4 @@
-import { EFieldType, ITokenInfo } from '../types';
+import { EFieldType, IPoolInfo, ITokenInfo } from '../types';
 import { IRootState } from './index';
 
 export interface ITokensMap {
@@ -35,18 +35,22 @@ export interface IPoolToken {
   timestamp: number;
 }
 
-export interface IPool {
+export interface IUserPool {
   firstToken: IPoolToken;
   secondToken: IPoolToken;
 }
 
-export interface IUserPool {
-  [key: string]: IPool;
+export interface IPool<T> {
+  [key: string]: T;
 }
 
 export interface IUserState {
-  pools: IUserPool;
+  pools: IPool<IUserPool>;
 }
 
 export type IGetStateFunction<T> = () => T;
 export type IGetState = IGetStateFunction<IRootState>;
+
+export interface IPoolsState {
+  byAddress: IPool<IPoolInfo>;
+}

@@ -6,7 +6,7 @@ import EmptyList from './empty/EmptyList';
 import { useAppSelector } from '../../hooks/hooks';
 import userSelector from '../../store/user/selectors';
 import tokensSelector from '../../store/tokens/selectors';
-import PoolRow from './row-item/PoolRow';
+import UserPoolRow from './list/row/user/UserPoolRow';
 import PoolList from './list/PoolList';
 import { Add } from '../../const';
 
@@ -35,7 +35,7 @@ const Pool: React.FC = () => {
         return {
           id: key,
           caption: (
-            <PoolRow
+            <UserPoolRow
               poolAddress={key}
               firstTokenInfo={firstTokenInfo}
               secondTokenInfo={secondTokenInfo}

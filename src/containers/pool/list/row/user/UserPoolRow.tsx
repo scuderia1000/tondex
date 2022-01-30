@@ -1,22 +1,18 @@
 import React, { useMemo } from 'react';
-import './PoolRow.css';
-import { ITokenInfo } from '../../../types';
-import { IPoolToken } from '../../../store/types';
-import ImageFallback from '../../../components/image/ImageFallback';
-import { ReactComponent as Remove } from '../../../components/assets/svg/remove.svg';
+import './UserPoolRow.css';
+import { ReactComponent as Remove } from '../../../../../components/assets/svg/remove.svg';
+import PoolName from '../../../name/PoolName';
+import { IPoolRowProps } from '../PoolRow';
+import { IPoolToken } from '../../../../../store/types';
 
-interface IProps {
+interface IProps extends IPoolRowProps<IPoolToken> {
   poolAddress: string;
-  firstTokenInfo: ITokenInfo;
-  firstPoolToken: IPoolToken;
-  secondTokenInfo: ITokenInfo;
-  secondPoolToken: IPoolToken;
   onRemove: (poolAddress: string) => void;
 }
 
-const cssPrefix = 'pool-row';
+const cssPrefix = 'user-pool-row';
 
-const PoolRow: React.FC<IProps> = ({
+const UserPoolRow: React.FC<IProps> = ({
   firstTokenInfo,
   firstPoolToken,
   secondTokenInfo,
@@ -41,11 +37,7 @@ const PoolRow: React.FC<IProps> = ({
   );
   return (
     <div className={cssPrefix}>
-      <div className={`${cssPrefix}--name`}>
-        <ImageFallback src={firstTokenInfo?.logoURI} alt={`${firstTokenInfo?.id}-logo`} />
-        <ImageFallback src={secondTokenInfo?.logoURI} alt={`${secondTokenInfo?.id}-logo`} />
-        <div>{`${firstTokenInfo?.symbol}/${secondTokenInfo?.symbol}`}</div>
-      </div>
+      <PoolName firstTokenInfo={firstTokenInfo} secondTokenInfo={secondTokenInfo} />
       <div className={`${cssPrefix}--amount`}>{`$${poolPriceUSD.toFixed(2)}`}</div>
       <div className={`${cssPrefix}--remove`} onClick={handleRemove}>
         <Remove className={`${cssPrefix}--icon`} />
@@ -54,4 +46,4 @@ const PoolRow: React.FC<IProps> = ({
   );
 };
 
-export default PoolRow;
+export default UserPoolRow;

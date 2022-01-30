@@ -8,6 +8,7 @@ import AddPool from '../pool/add/AddPool';
 import { fetchTokensAsync } from '../../store/tokens';
 import { useAppDispatch } from '../../hooks/hooks';
 import RemovePool from '../pool/remove/RemovePool';
+import Stats from '../stats/Stats';
 
 const cssPrefix = 'workspace';
 
@@ -25,6 +26,7 @@ const Workspace: React.FC = () => {
         <Routes>
           <Route path="/" element={<Swap />} />
           <Route path="pool" element={<Pool />} />
+          <Route path="stats" element={<Stats />} />
           <Route path="pool/add" element={<AddPool />} />
           <Route path="pool/remove">
             <Route path=":poolAddress" element={<RemovePool />} />

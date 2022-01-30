@@ -1,0 +1,15 @@
+.pool-name {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.pool-name > .image {
+  width: 18px;
+  height: 18px;
+  margin-right: 1px;
+}
+
+.pool-name > div {
+  margin-left: 8px;
+}

@@ -1,5 +1,6 @@
-import { IFetchResponse, ITokenInfo, ITokenPricePairs } from '../types';
+import { IFetchResponse, IPoolsResponse, ITokenInfo, ITokenPricePairs } from '../types';
 import { price } from '../mock/price';
+import pools from '../mock/pools.json';
 import { IPrice } from '../store/types';
 import { getPairPrices } from '../util';
 
@@ -14,6 +15,13 @@ export const fetchTokens = async () => {
 export const fetchTokensPrice = async (pair: ITokenPricePairs) => {
   const result = await fetch<IFetchResponse<IPrice>>({
     data: getPairPrices(pair),
+  });
+  return result;
+};
+
+export const fetchPools = async () => {
+  const result = await fetch<IFetchResponse<IPoolsResponse[]>>({
+    data: pools.data.pools,
   });
   return result;
 };
