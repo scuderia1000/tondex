@@ -30,7 +30,9 @@ const Workspace: React.FC = () => {
           <Route path="/" element={<Swap />} />
           <Route path="pool" element={<Pool />} />
           <Route path="stats" element={<Stats />} />
-          <Route path="pool/add" element={<AddPool />} />
+          <Route path="pool/add" element={<AddPool />}>
+            <Route path=":poolAddress" element={<AddPool />} />
+          </Route>
           <Route path="pool/remove">
             <Route path=":poolAddress" element={<RemovePool />} />
           </Route>

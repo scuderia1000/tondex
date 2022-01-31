@@ -101,10 +101,25 @@ const swapPairPlace = (dispatch: Function, getState: IGetState) => {
   });
 };
 
+const setInOutTokens =
+  (poolAddress = '') =>
+  (dispatch: Function, getState: IGetState) => {
+    if (!poolAddress) return;
+
+    const state = getState();
+    const userPools = userSelector.poolById(state, poolAddress);
+
+    batch(() => {
+      dispatch(setInputToken(userPools.firstToken.address));
+      dispatch(setOutputToken(userPools.secondToken.address));
+    });
+  };
+
 export default {
   setValue,
   clearPrice,
   loadPairPrice,
   updatePairPriceByPool,
   swapPairPlace,
+  setInOutTokens,
 };
