@@ -1,4 +1,5 @@
 .list {
+  padding-bottom: 10px;
   overflow: auto;
   border-top: 1px solid var(--hover-bg-color);
 }
@@ -16,4 +17,8 @@
   align-items: center;
   justify-content: flex-start;
   color: var(--main-bg-color);
+}
+
+.list--header > div:not(:first-child) {
+  justify-content: flex-end;
 }

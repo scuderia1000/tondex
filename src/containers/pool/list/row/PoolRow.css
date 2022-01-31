@@ -3,7 +3,7 @@
   grid-template-columns: var(--item-template);
   gap: 1em;
   font-weight: 600;
-  padding: 10px 12px;
+  padding: var(--row-padding);
 }
 
 .pool-row--item {

@@ -19,6 +19,8 @@
   --font-size-sm: 1.1rem;
   /** Width */
   --workspace-width: 500px;
+  /** Padding */
+  --row-padding: 10px 12px;
 }
 
 @font-face {

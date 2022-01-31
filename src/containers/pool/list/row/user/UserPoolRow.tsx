@@ -3,7 +3,7 @@ import './UserPoolRow.css';
 import { ReactComponent as Remove } from '../../../../../components/assets/svg/remove.svg';
 import PoolName from '../../../name/PoolName';
 import { IPoolRowProps } from '../PoolRow';
-import { IUserPool } from '../../../../../types';
+import { IUserPool, MouseEvent } from '../../../../../types';
 
 interface IProps extends IPoolRowProps<IUserPool> {
   poolAddress: string;
@@ -20,8 +20,9 @@ const UserPoolRow: React.FC<IProps> = ({
   poolAddress,
 }) => {
   const { firstToken, secondToken } = data;
-  const handleRemove = () => {
+  const handleRemove = (event: MouseEvent) => {
     onRemove(poolAddress);
+    event.stopPropagation();
   };
 
   const poolPriceUSD = useMemo(

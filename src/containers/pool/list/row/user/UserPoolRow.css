@@ -1,7 +1,7 @@
 .user-pool-row {
   display: grid;
   grid-template-columns: var(--item-template);
-  padding: 6px 12px;
+  padding: var(--row-padding);
   gap: 1em;
   font-weight: 600;
 }
