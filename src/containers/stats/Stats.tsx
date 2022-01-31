@@ -2,7 +2,7 @@ import React, { useEffect, useMemo } from 'react';
 import { fetchPoolsAsync } from '../../store/pools';
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 import './Stats.css';
-import { PoolListHeader } from '../../const';
+import { StatsPoolsHeader } from '../../const';
 import List from '../../components/list/List';
 import poolsSelector from '../../store/pools/selectors';
 import tokensSelector from '../../store/tokens/selectors';
@@ -24,12 +24,11 @@ const Stats: React.FC = () => {
         const secondTokenInfo = tokensByAddress[pool.token1.id];
         return {
           id: key,
-          caption: (
+          row: (
             <PoolRow
               firstTokenInfo={firstTokenInfo}
               secondTokenInfo={secondTokenInfo}
-              firstPoolToken={poolsMap[pool.token0.id]}
-              secondPoolToken={poolsMap[pool.token1.id]}
+              data={pool}
             />
           ),
         };
@@ -38,16 +37,14 @@ const Stats: React.FC = () => {
   );
 
   useEffect(() => {
-    dispatch(fetchPoolsAsync());
+    if (!Object.keys(poolsMap).length) {
+      dispatch(fetchPoolsAsync());
+    }
   }, []);
 
   return (
     <div className={cssPrefix}>
-      <div className={`${cssPrefix}--header`}>
-        <div>{PoolListHeader.Name}</div>
-        <div>{PoolListHeader.Volume}</div>
-      </div>
-      <List items={pools} />
+      <List items={pools} headerItems={Object.values(StatsPoolsHeader)} itemHeight={40} />
     </div>
   );
 };

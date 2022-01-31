@@ -6,8 +6,8 @@ import List from '../../../components/list/List';
 import { useAppSelector } from '../../../hooks/hooks';
 import tokensSelector from '../../../store/tokens/selectors';
 import { IListItem } from '../../../components/list/item/ListItem';
-import TokenCaption from './caption/TokenCaption';
 import { EnterTokenName } from '../../../const';
+import TokenSelectorRow from './row/TokenSelectorRow';
 
 interface IProps {
   onSelectToken: (item?: IListItem<ITokenInfo>) => void;
@@ -25,8 +25,7 @@ const TokenSelector: React.FC<IProps> = ({ onSelectToken, disabledItems }) => {
       Object.keys(tokensByAddress)
         .map((address) => ({
           id: address,
-          caption: <TokenCaption token={tokensByAddress[address]} />,
-          logoURI: tokensByAddress[address].logoURI,
+          row: <TokenSelectorRow item={tokensByAddress[address]} />,
           disabled: disabledItems?.includes(address),
           data: tokensByAddress[address],
         }))

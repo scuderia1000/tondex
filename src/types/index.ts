@@ -1,4 +1,5 @@
 import React from 'react';
+import { IPoolToken } from '../store/types';
 
 export interface ITokenInfo {
   name: string;
@@ -82,3 +83,12 @@ export interface IPoolInfo {
 export type IPoolsResponse = Omit<IPoolInfo, 'address'> & {
   id: string;
 };
+
+export interface IUserPool {
+  firstToken: IPoolToken;
+  secondToken: IPoolToken;
+}
+
+export interface IMap<T> {
+  [key: string]: T;
+}

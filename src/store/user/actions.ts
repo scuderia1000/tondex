@@ -1,8 +1,9 @@
 import swapSelector from '../swap/selectors';
-import { IGetState, IUserPool, IPool } from '../types';
+import { IGetState } from '../types';
 import userSelector from './selectors';
 import { removePoolById, setPool, setPoolsById } from './index';
 import { toFixed } from '../../util';
+import { IMap, IUserPool } from '../../types';
 
 const createPool = () => (dispatch: Function, getState: IGetState) => {
   const state = getState();
@@ -40,7 +41,7 @@ const createPool = () => (dispatch: Function, getState: IGetState) => {
     return !!poolAddress;
   });
   if (isPoolExist) {
-    const updatedPool: IPool<IUserPool> = {
+    const updatedPool: IMap<IUserPool> = {
       [poolAddress]: {
         ...pool,
         firstToken: {
@@ -83,7 +84,7 @@ const removePoolLiquidity = (poolAddress: string) => (dispatch: Function, getSta
     return;
   }
 
-  const updatedPool: IPool<IUserPool> = {
+  const updatedPool: IMap<IUserPool> = {
     [poolAddress]: {
       ...pool,
       firstToken: {

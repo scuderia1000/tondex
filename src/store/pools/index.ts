@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { IPool, IPoolsState } from '../types';
+import { IPoolsState } from '../types';
 import { getRandomNumber } from '../../util';
-import { IPoolInfo, IPoolsResponse } from '../../types';
+import { IMap, IPoolInfo, IPoolsResponse } from '../../types';
 import { fetchPools } from '../../api';
 
 const initialState: IPoolsState = {
@@ -20,7 +20,7 @@ export const slice = createSlice({
     setPool(state: IPoolsState, { payload }: PayloadAction<IPoolInfo>) {
       state.byAddress[getRandomNumber()] = payload;
     },
-    setPoolsById(state: IPoolsState, { payload }: PayloadAction<IPool<IPoolInfo>>) {
+    setPoolsById(state: IPoolsState, { payload }: PayloadAction<IMap<IPoolInfo>>) {
       Object.keys(payload).forEach((key) => {
         state.byAddress[key] = payload[key];
       });

@@ -1,0 +1,13 @@
+.pool-row {
+  display: grid;
+  grid-template-columns: var(--item-template);
+  gap: 1em;
+  font-weight: 600;
+  padding: 10px 12px;
+}
+
+.pool-row--item {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}

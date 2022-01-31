@@ -1,9 +1,14 @@
 .pool-list {
   display: flex;
   flex-direction: column;
-  /*padding: 8px;*/
 }
 
-.pool-list .list-item {
-  padding: 0;
+.pool-list .list--header {
+  padding: 0 12px;
+  margin-bottom: 12px;
+}
+
+.pool-list .user-pool-row,
+.pool-list .list--header {
+  --item-template: 5fr repeat(1, 1fr) 24px;
 }

@@ -1,14 +1,11 @@
 import React from 'react';
 import classNames from 'classnames';
-import ImageFallback from '../../image/ImageFallback';
 import './ListItem.css';
 import { IMouseEventHandler, ITokenInfo, MouseEvent } from '../../../types';
 
 export interface IListItem<T = {}> {
   id?: string;
-  icon?: React.ReactNode;
-  logoURI?: string;
-  caption?: string | React.ReactNode;
+  row?: React.ReactNode;
   disabled?: boolean;
   data?: T;
 }
@@ -18,12 +15,12 @@ interface IProps {
   onItemClick?: IMouseEventHandler<IListItem<ITokenInfo>>;
 }
 
-const cssPrefix = 'list-item';
+export const cssPrefixItem = 'list-item';
 
 const ListItem: React.FC<IProps> = ({ item, onItemClick }) => {
   const classes = classNames({
-    [cssPrefix]: true,
-    [`${cssPrefix}--disabled`]: item.disabled,
+    [cssPrefixItem]: true,
+    [`${cssPrefixItem}--disabled`]: item.disabled,
   });
 
   const onClick = (event: MouseEvent) => {
@@ -35,9 +32,7 @@ const ListItem: React.FC<IProps> = ({ item, onItemClick }) => {
 
   return (
     <div className={classes} onClick={onClick}>
-      {item.icon}
-      {item.logoURI && <ImageFallback src={item.logoURI} alt={`${item.id}-logo`} />}
-      <div className={`${cssPrefix}-caption`}>{item.caption}</div>
+      {item.row}
     </div>
   );
 };

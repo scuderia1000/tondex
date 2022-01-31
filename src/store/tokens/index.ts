@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { ITokensMap, ITokesState } from '../types';
+import { ITokesState } from '../types';
 import { fetchTokens } from '../../api';
-import { ITokenInfo } from '../../types';
+import { IMap, ITokenInfo } from '../../types';
 import { unique } from '../../util';
 
 const initialState: ITokesState = {
@@ -26,7 +26,7 @@ export const slice = createSlice({
   name: 'tokens',
   initialState,
   reducers: {
-    setTokens(state: ITokesState, { payload }: PayloadAction<ITokensMap>) {
+    setTokens(state: ITokesState, { payload }: PayloadAction<IMap<ITokenInfo>>) {
       state.byAddress = payload;
     },
   },

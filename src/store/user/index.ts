@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { IUserPool, IPool, IUserState } from '../types';
+import { IUserState } from '../types';
 import { getRandomNumber } from '../../util';
+import { IMap, IUserPool } from '../../types';
 
 const initialState: IUserState = {
   pools: {
@@ -28,7 +29,7 @@ export const slice = createSlice({
     setPool(state: IUserState, { payload }: PayloadAction<IUserPool>) {
       state.pools[getRandomNumber()] = payload;
     },
-    setPoolsById(state: IUserState, { payload }: PayloadAction<IPool<IUserPool>>) {
+    setPoolsById(state: IUserState, { payload }: PayloadAction<IMap<IUserPool>>) {
       Object.keys(payload).forEach((key) => {
         state.pools[key] = payload[key];
       });

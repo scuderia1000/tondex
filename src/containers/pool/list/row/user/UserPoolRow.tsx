@@ -3,9 +3,9 @@ import './UserPoolRow.css';
 import { ReactComponent as Remove } from '../../../../../components/assets/svg/remove.svg';
 import PoolName from '../../../name/PoolName';
 import { IPoolRowProps } from '../PoolRow';
-import { IPoolToken } from '../../../../../store/types';
+import { IUserPool } from '../../../../../types';
 
-interface IProps extends IPoolRowProps<IPoolToken> {
+interface IProps extends IPoolRowProps<IUserPool> {
   poolAddress: string;
   onRemove: (poolAddress: string) => void;
 }
@@ -14,27 +14,23 @@ const cssPrefix = 'user-pool-row';
 
 const UserPoolRow: React.FC<IProps> = ({
   firstTokenInfo,
-  firstPoolToken,
   secondTokenInfo,
-  secondPoolToken,
+  data = {},
   onRemove,
   poolAddress,
 }) => {
+  const { firstToken, secondToken } = data;
   const handleRemove = () => {
     onRemove(poolAddress);
   };
 
   const poolPriceUSD = useMemo(
     () =>
-      Number(firstPoolToken.price) * Number(firstPoolToken.tokensAmount) +
-      Number(secondPoolToken.price) * Number(secondPoolToken.tokensAmount),
-    [
-      firstPoolToken.price,
-      firstPoolToken.tokensAmount,
-      secondPoolToken.price,
-      secondPoolToken.tokensAmount,
-    ],
+      Number(firstToken?.price) * Number(firstToken?.tokensAmount) +
+      Number(secondToken?.price) * Number(secondToken?.tokensAmount),
+    [firstToken?.price, firstToken?.tokensAmount, secondToken?.price, secondToken?.tokensAmount],
   );
+
   return (
     <div className={cssPrefix}>
       <PoolName firstTokenInfo={firstTokenInfo} secondTokenInfo={secondTokenInfo} />

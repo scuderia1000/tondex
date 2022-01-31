@@ -7,8 +7,9 @@ import { useAppSelector } from '../../hooks/hooks';
 import userSelector from '../../store/user/selectors';
 import tokensSelector from '../../store/tokens/selectors';
 import UserPoolRow from './list/row/user/UserPoolRow';
-import PoolList from './list/PoolList';
-import { Add } from '../../const';
+import { Add, UserPoolsHeader } from '../../const';
+import { IUserPool } from '../../types';
+import List from '../../components/list/List';
 
 export const cssPrefix = 'pool';
 export const cssPrefixPools = `${cssPrefix}-list`;
@@ -32,15 +33,18 @@ const Pool: React.FC = () => {
         const { firstToken, secondToken } = pair;
         const firstTokenInfo = tokensByAddress[firstToken.address];
         const secondTokenInfo = tokensByAddress[secondToken.address];
+        const data: IUserPool = {
+          firstToken,
+          secondToken,
+        };
         return {
           id: key,
-          caption: (
+          row: (
             <UserPoolRow
               poolAddress={key}
               firstTokenInfo={firstTokenInfo}
               secondTokenInfo={secondTokenInfo}
-              firstPoolToken={firstToken}
-              secondPoolToken={secondToken}
+              data={data}
               onRemove={onRemovePool}
             />
           ),
@@ -53,7 +57,11 @@ const Pool: React.FC = () => {
     <div className={cssPrefix}>
       <PoolHeader linkTo={'add'} label={Add} />
       <main className={cssPrefixPools}>
-        {pools.length ? <PoolList items={pools} /> : <EmptyList />}
+        {pools.length ? (
+          <List items={pools} headerItems={Object.values(UserPoolsHeader)} itemHeight={36} />
+        ) : (
+          <EmptyList />
+        )}
       </main>
     </div>
   );

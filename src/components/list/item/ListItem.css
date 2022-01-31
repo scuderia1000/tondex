@@ -1,18 +1,6 @@
-.list-item {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  padding: 4px 20px;
-  height: 50px;
-}
-
 .list-item:hover {
   cursor: pointer;
   background-color: var(--hover-bg-color);
-}
-
-.list-item .image {
-  margin-right: 12px;
 }
 
 .list-item--disabled {
@@ -22,9 +10,4 @@
 
 .list-item--disabled:hover {
   cursor: auto;
-}
-
-.list-item-caption {
-  width: 100%;
-  overflow: hidden;
 }
