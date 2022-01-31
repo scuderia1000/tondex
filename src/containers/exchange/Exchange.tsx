@@ -103,6 +103,10 @@ const Exchange: React.FC<IProps> = ({
     [toggleModalVisibility],
   );
 
+  const handleChangeButtonClick = useCallback(() => {
+    dispatch(swapActions.swapPairPlace);
+  }, [dispatch]);
+
   const disabledItems = useMemo(
     () => [inputTokenInfo?.address ?? '', outputTokenInfo?.address ?? ''],
     [inputTokenInfo?.address, outputTokenInfo?.address],
@@ -165,7 +169,7 @@ const Exchange: React.FC<IProps> = ({
               />
             }
           />
-          <ChangeButton />
+          <ChangeButton onClick={handleChangeButtonClick} />
           <TokenInput
             type={'number'}
             value={inOutValues.out}

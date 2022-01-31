@@ -13,3 +13,7 @@
   border: 1px solid rgb(237, 238, 242);
   box-shadow: 0 6px 12px #00000026;
 }
+
+.stats.workspace-container {
+  --workspace-width: 900px;
+}

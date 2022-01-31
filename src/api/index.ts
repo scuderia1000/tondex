@@ -25,3 +25,10 @@ export const fetchPools = async () => {
   });
   return result;
 };
+
+export const fetchSwapTokens = async () => {
+  const result = await fetch<IFetchResponse<string>>({
+    data: 'swapped',
+  });
+  return result;
+};

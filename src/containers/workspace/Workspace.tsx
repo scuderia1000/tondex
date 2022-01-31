@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { Route, Routes } from 'react-router-dom';
+import React, { useEffect, useMemo } from 'react';
+import { Route, Routes, useLocation } from 'react-router-dom';
 import WorkspaceHeader from '../../components/header/workspace/WorkspaceHeader';
 import Swap from '../swap/Swap';
 import './Workspace.css';
@@ -14,6 +14,9 @@ const cssPrefix = 'workspace';
 
 const Workspace: React.FC = () => {
   const dispatch = useAppDispatch();
+  const location = useLocation();
+
+  const currentPath = useMemo(() => location.pathname.split('/')?.[1], [location.pathname]);
 
   useEffect(() => {
     dispatch(fetchTokensAsync());
@@ -21,7 +24,7 @@ const Workspace: React.FC = () => {
 
   return (
     <div className={cssPrefix}>
-      <div className={`${cssPrefix}-container`}>
+      <div className={`${currentPath} ${cssPrefix}-container`}>
         <WorkspaceHeader />
         <Routes>
           <Route path="/" element={<Swap />} />

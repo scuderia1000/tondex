@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { IExchangeState, IPrice } from '../types';
 import { EFieldType, ITokenPricePairs } from '../../types';
 import { TONCOIN_ADDRESS } from '../../const';
-import { fetchTokensPrice } from '../../api';
+import { fetchSwapTokens, fetchTokensPrice } from '../../api';
 
 const initialState: IExchangeState = {
   in: TONCOIN_ADDRESS,
@@ -25,6 +25,11 @@ export const fetchTokensPriceAsync = createAsyncThunk(
     return response.data;
   },
 );
+
+export const fetchSwapTokensAsync = createAsyncThunk('tokens/fetchSwap', async () => {
+  const response = await fetchSwapTokens();
+  return response.data;
+});
 
 export const slice = createSlice({
   name: 'swap',
@@ -53,12 +58,11 @@ export const slice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(
-      fetchTokensPriceAsync.fulfilled,
-      (state, { payload }: PayloadAction<IPrice>) => {
+    builder
+      .addCase(fetchTokensPriceAsync.fulfilled, (state, { payload }: PayloadAction<IPrice>) => {
         state.price = payload;
-      },
-    );
+      })
+      .addCase(fetchSwapTokensAsync.fulfilled, () => initialState);
   },
 });
 

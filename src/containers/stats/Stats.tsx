@@ -8,7 +8,7 @@ import poolsSelector from '../../store/pools/selectors';
 import tokensSelector from '../../store/tokens/selectors';
 import PoolRow from '../pool/list/row/PoolRow';
 
-const cssPrefix = 'stats';
+const cssPrefix = 'statistics';
 
 const Stats: React.FC = () => {
   const dispatch = useAppDispatch();

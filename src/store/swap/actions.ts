@@ -6,6 +6,7 @@ import tokensSelector from '../tokens/selectors';
 import {
   clearPrice,
   fetchTokensPriceAsync,
+  setFieldType,
   setInputToken,
   setOutputToken,
   setPrice,
@@ -73,9 +74,37 @@ const updatePairPriceByPool =
     });
   };
 
+const swapPairPlace = (dispatch: Function, getState: IGetState) => {
+  const state = getState();
+  let inTokenAddress = swapSelector.inputToken(state);
+  let outTokenAddress = swapSelector.outputToken(state);
+  let fieldType = swapSelector.fieldType(state);
+  if (!inTokenAddress && !outTokenAddress) return;
+
+  [inTokenAddress, outTokenAddress] = [outTokenAddress, inTokenAddress];
+  if (fieldType === EFieldType.IN) {
+    fieldType = EFieldType.OUT;
+  } else {
+    fieldType = EFieldType.IN;
+  }
+
+  const inToken = tokensSelector.tokenByAddress(state, inTokenAddress);
+  const outToken = tokensSelector.tokenByAddress(state, outTokenAddress);
+
+  batch(() => {
+    dispatch(setInputToken(inTokenAddress));
+    dispatch(setOutputToken(outTokenAddress));
+    dispatch(setFieldType(fieldType));
+    if (inToken && outToken) {
+      dispatch(loadPairPrice());
+    }
+  });
+};
+
 export default {
   setValue,
   clearPrice,
   loadPairPrice,
   updatePairPriceByPool,
+  swapPairPlace,
 };
