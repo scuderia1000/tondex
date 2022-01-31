@@ -8,6 +8,8 @@ UI for The Open Network decentralized exchange
 * adding and removing liquidity from a pool
 * list of pools and pool statistics
 
+All tokens data and requests are mocked.
+
 ### Installation
 ```
 yarn install
